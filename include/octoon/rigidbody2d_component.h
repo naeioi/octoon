@@ -5,6 +5,7 @@
 #include <vector>
 #include <octoon/game_component.h>
 #include <octoon/collider2d_component.h>
+#include <octoon/circle_collider2d_component.h>
 #include <octoon/math/math.h>
 #include <octoon/runtime/singleton.h>
 
@@ -19,16 +20,17 @@ namespace octoon
         Kinematic = 2
     };
 
-    class OCTOON_EXPORT Rigidbody2DComponent final : public GameComponent
+    class OCTOON_EXPORT Rigidbody2D final : public GameComponent
 	{
+        OctoonDeclareSubInterface(Rigidbody2D, runtime::RttiInterface)
         public:
-            Rigidbody2DComponent() noexcept;
-            ~Rigidbody2DComponent();
+            Rigidbody2D() noexcept;
+            ~Rigidbody2D();
             virtual GameComponentPtr clone() const noexcept;
 
             void set_body_type(RigidbodyType2D type) noexcept;
             RigidbodyType2D get_body_type() const noexcept;
-            
+
             void set_position(math::Vector2 pos) noexcept;
             math::Vector2 get_position() const noexcept;
 
@@ -54,6 +56,9 @@ namespace octoon
             RigidbodyType2D body_type;
             math::Vector2 position;
             float rotation;
+        
+            friend class Collider2D;
+            friend class CircleCollider2D;
     };
 }
 

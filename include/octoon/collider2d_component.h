@@ -5,7 +5,9 @@
 #include <octoon/game_component.h>
 #include <octoon/math/math.h>
 
+
 class b2Body;
+class b2Fixture;
 
 namespace octoon
 {
@@ -17,7 +19,18 @@ namespace octoon
             ~Collider2D();
             virtual GameComponentPtr clone() const noexcept;
 
+        protected:
+            virtual void on_collision_change() = 0;
+            virtual void on_collision_enter() = 0;
+            virtual void on_collision_exit() = 0;
+            virtual void on_collision_stay() = 0;
+        
+        protected:
+            b2Fixture *collider;
+
         private:
+
+            friend class Rigidbody2D;
     };
 }
 

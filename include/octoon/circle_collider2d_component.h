@@ -9,7 +9,7 @@ class b2Body;
 
 namespace octoon
 {
-    class OCTOON_EXPORT CircleCollider2D : public GameComponent
+    class OCTOON_EXPORT CircleCollider2D : public Collider2D
 	{
         OctoonDeclareSubInterface(CircleCollider2D, runtime::RttiInterface)
         public:
@@ -19,6 +19,12 @@ namespace octoon
 
             void set_radius(float r) noexcept;
             float get_radius() const noexcept;
+
+        protected:
+            virtual void on_collision_change() noexcept;
+            virtual void on_collision_enter() noexcept;
+            virtual void on_collision_exit() noexcept;
+            virtual void on_collision_stay() noexcept;
 
         private:
             float radius;
