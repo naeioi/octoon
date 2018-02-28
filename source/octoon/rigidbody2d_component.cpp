@@ -8,19 +8,6 @@ namespace octoon
 
     Rigidbody2DComponent::Rigidbody2DComponent() noexcept
     {
-        b2World *world = runtime::Singleton<b2World>::instance();
-
-        b2BodyDef bodyDef;   //一个物体的定义  
-        bodyDef.type = b2_staticBody; //物体的类型，不动的，坚硬的~ 可以把这样的物体当成地面  
-        b2PolygonShape borderShape; // 一个方形的形状
-        b2FixtureDef borderFixture; // 一个定制器
-        
-        //定义地板  
-        bodyDef.position.Set(0, 0); // 地板在0，0位置  
-        borderShape.SetAsBox(VisibleRect::right().x * PTM_RATIO, 0); //设置长度和高度，这里描述的地板就像是X轴，是一条线  
-        borderFixture.shape = &borderShape;  
-        b2Body * bottomBorder = mWorld->CreateBody(&bodyDef); //在世界中创建一个物体（地面）  
-        bottomBorder->CreateFixture(&borderFixture);          //定制地面的形状  
     }
 
 	Rigidbody2DComponent::~Rigidbody2DComponent()
@@ -33,40 +20,66 @@ namespace octoon
 
     }
 
-    void Rigidbody2DComponent::set_body_type(RigidbodyType2D type)
+    void Rigidbody2DComponent::set_body_type(RigidbodyType2D type) noexcept
     {
         body_type = type;
     }
 
-    RigidbodyType2D Rigidbody2DComponent::get_body_type()
+    RigidbodyType2D Rigidbody2DComponent::get_body_type() const noexcept
     {
         return body_type;
     }
 
+    void Rigidbody2DComponent::set_position(math::Vector2 pos) noexcept
+    {
+        position = pos;
+    }
+
+    math::Vector2 Rigidbody2DComponent::get_position() const noexcept
+    {
+        return position;
+    }
+
+    void Rigidbody2DComponent::set_rotation(float delta) noexcept
+    {
+        rotation = delta;
+    }
+
+    float Rigidbody2DComponent::get_rotation() const noexcept
+    {
+        return rotation;
+    }
 
     void Rigidbody2DComponent::on_activate() noexcept
     {
-
+        add_component_dispatch(GameDispatchType::MoveAfter, this);
+        build_rigibody();
     }
 
     void Rigidbody2DComponent::on_deactivate() noexcept
     {
-
+        remove_component_dispatch(GameDispatchType::MoveAfter, this);
     }
 
     void Rigidbody2DComponent::on_attach_component(const GameComponentPtr& component) noexcept
     {
-
+        /*
+        if (component->is_a<Collider2DComponent>())
+		    component->downcast<Collider2DComponent>()->addShapeChangeListener(&_onCollisionChange);
+            */
     }
 
     void Rigidbody2DComponent::on_detach_component(const GameComponentPtr& component) noexcept
     {
-
+        /*
+        if (component->is_a<Collider2DComponent>())
+		    component->downcast<Collider2DComponent>()->removeShapeChangeListener(&_onCollisionChange);
+            */
     }
 
     void Rigidbody2DComponent::on_collision_change() noexcept
     {
-
+        build_rigibody();
     }
     void Rigidbody2DComponent::on_collision_enter() noexcept
     {
@@ -83,5 +96,22 @@ namespace octoon
 
     void Rigidbody2DComponent::build_rigibody() noexcept
     {
+        b2World *world = runtime::Singleton<b2World>::instance();
+
+        auto colliderShape = get_component<Collider2DComponent>();
+        if (!colliderShape)
+            return;
+
+        b2BodyDef bodyDef;
+        bodyDef.type = (b2BodyType)get_body_type();
+        bodyDef.position.Set(position.x, position.y);
+        
+        b2PolygonShape shape;
+        shape.SetAsBox(VisibleRect::right().x * PTM_RATIO, 0);
+
+        b2FixtureDef fixture;
+        fixture.shape = &shape;
+        body = world->CreateBody(&bodyDef);
+        body->CreateFixture(&fixture); 
     }
 }

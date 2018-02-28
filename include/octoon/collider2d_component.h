@@ -9,11 +9,12 @@ class b2Body;
 
 namespace octoon
 {
-    class OCTOON_EXPORT Collider2DComponent final : public GameComponent
+    class OCTOON_EXPORT Collider2D : public GameComponent
 	{
+        OctoonDeclareSubInterface(Collider2D, runtime::RttiInterface)
         public:
-            Collider2DComponent() noexcept;
-            ~Collider2DComponent();
+            Collider2D() noexcept;
+            ~Collider2D();
             virtual GameComponentPtr clone() const noexcept;
 
         private:
