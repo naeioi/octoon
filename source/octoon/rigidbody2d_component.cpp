@@ -50,27 +50,27 @@ namespace octoon
         return rotation;
     }
 
-    void Rigidbody2D::on_activate() noexcept
+    void Rigidbody2D::on_attach() except
     {
         add_component_dispatch(GameDispatchType::MoveAfter, this);
         build_rigibody();
     }
 
-    void Rigidbody2D::on_deactivate() noexcept
+    void Rigidbody2D::on_detach() noexcept
     {
         remove_component_dispatch(GameDispatchType::MoveAfter, this);
     }
 
     void Rigidbody2D::on_attach_component(const GameComponentPtr& component) noexcept
     {
-        if (component->is_a<Collider2D>())
-		    component->downcast<Collider2D>()->addShapeChangeListener(&_onCollisionChange);
+        //if (component->is_a<Collider2D>())
+		//    component->downcast<Collider2D>()->addShapeChangeListener(&_onCollisionChange);
     }
 
     void Rigidbody2D::on_detach_component(const GameComponentPtr& component) noexcept
     {
-        if (component->is_a<Collider2D>())
-		    component->downcast<Collider2D>()->removeShapeChangeListener(&_onCollisionChange);
+        //if (component->is_a<Collider2D>())
+		//    component->downcast<Collider2D>()->removeShapeChangeListener(&_onCollisionChange);
     }
 
     void Rigidbody2D::build_rigibody() noexcept

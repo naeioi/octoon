@@ -27,6 +27,14 @@ namespace octoon
             virtual void on_collision_stay() noexcept;
 
         private:
+            virtual void on_attach() except;
+            virtual void on_detach() noexcept;
+
+            virtual void on_attach_component(const GameComponentPtr& component) except;
+            virtual void on_detach_component(const GameComponentPtr& component) noexcept;
+
+        private:
+            bool is_registered;
             float radius;
     };
 }

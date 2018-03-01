@@ -8,6 +8,7 @@ namespace octoon
     OctoonImplementSubClass(CircleCollider2D, GameComponent, "CircleCollider2D")
 
     CircleCollider2D::CircleCollider2D() noexcept
+        :is_registered(false)
     {
 
     }
@@ -25,17 +26,21 @@ namespace octoon
     void CircleCollider2D::set_radius(float r) noexcept
     {
         radius = r;
+        on_collision_change();
     }
+
     float CircleCollider2D::get_radius() const noexcept
     {
         return radius;
     }
 
-
     void CircleCollider2D::on_collision_change() noexcept
     {
         auto rigid_body = get_component<Rigidbody2D>();
         if (!rigid_body)
+            return;
+
+        if(!is_registered)
             return;
         
         b2CircleShape shape_def;
@@ -48,6 +53,7 @@ namespace octoon
         rigid_body->body->DestroyFixture(collider);
         collider = rigid_body->body->CreateFixture(&fixture_def);
     }
+
     void CircleCollider2D::on_collision_enter() noexcept
     {
         auto rigid_body = get_component<Rigidbody2D>();
@@ -63,17 +69,49 @@ namespace octoon
         
         collider = rigid_body->body->CreateFixture(&fixture_def);
 
+        is_registered = true;
     }
+
     void CircleCollider2D::on_collision_exit() noexcept
     {
         auto rigid_body = get_component<Rigidbody2D>();
         if (!rigid_body)
             return;
 
+        if(!is_registered)
+            return;
+
         rigid_body->body->DestroyFixture(collider);
     }
+
     void CircleCollider2D::on_collision_stay() noexcept
     {
 
+    }
+
+    void CircleCollider2D::on_attach() except
+    {
+        auto rigid_body = get_component<Rigidbody2D>();
+        if (!rigid_body)
+            return;
+
+        on_collision_enter();
+    }
+
+    void CircleCollider2D::on_detach() noexcept
+    {
+        on_collision_exit();
+    }
+
+    void CircleCollider2D::on_attach_component(const GameComponentPtr& component) except
+    {
+        if (component->is_a<Rigidbody2D>())
+        {
+            on_collision_enter();
+        }
+    }
+
+    void CircleCollider2D::on_detach_component(const GameComponentPtr& component) noexcept
+    {
     }
 }

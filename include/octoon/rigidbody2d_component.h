@@ -38,16 +38,11 @@ namespace octoon
             float get_rotation() const noexcept;
 
         private:
-        	virtual void on_activate() noexcept;
-            virtual void on_deactivate() noexcept;
+        	virtual void on_attach() except;
+            virtual void on_detach() noexcept;
 
             virtual void on_attach_component(const GameComponentPtr& component) noexcept;
             virtual void on_detach_component(const GameComponentPtr& component) noexcept;
-
-            virtual void on_collision_change() noexcept;
-            virtual void on_collision_enter() noexcept;
-            virtual void on_collision_exit() noexcept;
-            virtual void on_collision_stay() noexcept;
 
             void build_rigibody() noexcept;
 

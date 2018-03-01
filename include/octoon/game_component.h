@@ -31,15 +31,6 @@ namespace octoon
 			return std::dynamic_pointer_cast<T>(this->get_component(T::RTTI));
 		}
 
-		template<typename T>
-		const GameComponents& get_components() const noexcept
-		{
-			GameComponents components;
-			assert(this->rtti() != T::RTTI);
-			gameObject_->get_components_in_children<T>(components);
-			return components;
-		}
-
 		static GameComponentPtr instantiate(const GameComponent* component) except;
 		static GameComponentPtr instantiate(const GameComponent& component) except;
 
