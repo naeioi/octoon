@@ -55,6 +55,7 @@ namespace octoon
             friend class CircleCollider2D;
             friend class BoxCollider2D;
             friend class PolygonCollider2D;
+            friend class EdgeCollider2D;
     };
 }
 

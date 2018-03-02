@@ -18,7 +18,7 @@ namespace octoon
             ~BoxCollider2D();
             virtual GameComponentPtr clone() const noexcept;
 
-            void set_auto_tiling(bool is_auyo_tilling) noexcept;
+            void set_auto_tiling(bool is_auto_tilling) noexcept;
             bool get_auto_tiling() const noexcept;
 
             void set_edge_radius(float r) noexcept;
