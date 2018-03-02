@@ -64,10 +64,14 @@ namespace octoon
 
         if(!is_registered)
             return;
-        
+
+        std::vector<b2Vec2> vertices(points.size());
+        for (int i = 0; i != points.size(); ++i)
+        {
+            vertices[i].Set(points[i].x, points[i].y);
+        }
         b2PolygonShape shape_def;
-        shape_def.SetAsBox(size.x, size.y);
-        shape_def.m_radius = edge_radius;
+        shape_def.Set(vertices.data(), vertices.size());
 
         b2FixtureDef fixture_def;
         fixture_def.shape = &shape_def;
@@ -82,9 +86,13 @@ namespace octoon
         if (!rigid_body)
             return;
         
+        std::vector<b2Vec2> vertices(points.size());
+        for (int i = 0; i != points.size(); ++i)
+        {
+            vertices[i].Set(points[i].x, points[i].y);
+        }
         b2PolygonShape shape_def;
-        shape_def.SetAsBox(size.x, size.y);
-        shape_def.m_radius = edge_radius;
+        shape_def.Set(vertices.data(), vertices.size());
 
         b2FixtureDef fixture_def;
         fixture_def.shape = &shape_def;
