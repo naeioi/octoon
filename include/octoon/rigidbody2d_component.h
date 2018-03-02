@@ -5,7 +5,6 @@
 #include <vector>
 #include <octoon/game_component.h>
 #include <octoon/collider2d_component.h>
-#include <octoon/circle_collider2d_component.h>
 #include <octoon/math/math.h>
 #include <octoon/runtime/singleton.h>
 
@@ -54,6 +53,7 @@ namespace octoon
         
             friend class Collider2D;
             friend class CircleCollider2D;
+            friend class BoxCollider2D;
     };
 }
 

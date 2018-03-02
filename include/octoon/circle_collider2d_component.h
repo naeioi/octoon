@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <octoon/game_component.h>
+#include <octoon/collider2d_component.h>
 #include <octoon/math/math.h>
 
 class b2Body;
