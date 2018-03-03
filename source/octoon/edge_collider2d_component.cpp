@@ -81,8 +81,8 @@ namespace octoon
         {
             vertices[i].Set(points[i].x, points[i].y);
         }
-        b2PolygonShape shape_def;
-        shape_def.Set(vertices.data(), vertices.size());
+        b2ChainShape shape_def;
+        shape_def.CreateChain(vertices.data(), vertices.size());
         shape_def.m_radius = edge_radius;
 
         b2FixtureDef fixture_def;
@@ -103,8 +103,8 @@ namespace octoon
         {
             vertices[i].Set(points[i].x, points[i].y);
         }
-        b2PolygonShape shape_def;
-        shape_def.Set(vertices.data(), vertices.size());
+        b2ChainShape shape_def;
+        shape_def.CreateChain(vertices.data(), vertices.size());
         shape_def.m_radius = edge_radius;
 
         b2FixtureDef fixture_def;
