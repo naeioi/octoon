@@ -5,7 +5,7 @@
 
 namespace octoon
 {
-    OctoonImplementSubClass(BoxCollider2D, GameComponent, "BoxCollider2D")
+    OctoonImplementSubClass(BoxCollider2D, Collider2D, "BoxCollider2D")
 
     BoxCollider2D::BoxCollider2D() noexcept
         :is_registered(false)

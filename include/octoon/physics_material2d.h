@@ -17,9 +17,16 @@ namespace octoon
         public:
             PhysicsMaterial2D() noexcept;
             ~PhysicsMaterial2D();
+
+            void set_bounciness(float b) noexcept;
+            float get_bounciness() const noexcept;
+
+            void set_friction(float f) noexcept;
+            float get_friction() const noexcept;
         
         protected:
-
+            float bounciness; // The degree of elasticity during collisions.
+            float friction; // Coefficient of friction.
         private:
             friend class Rigidbody2D;
     };

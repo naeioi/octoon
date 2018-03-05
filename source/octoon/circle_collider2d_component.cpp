@@ -5,7 +5,7 @@
 
 namespace octoon
 {
-    OctoonImplementSubClass(CircleCollider2D, GameComponent, "CircleCollider2D")
+    OctoonImplementSubClass(CircleCollider2D, Collider2D, "CircleCollider2D")
 
     CircleCollider2D::CircleCollider2D() noexcept
         :is_registered(false)
