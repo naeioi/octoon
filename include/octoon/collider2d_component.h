@@ -4,6 +4,7 @@
 #include <memory>
 #include <octoon/game_component.h>
 #include <octoon/math/math.h>
+#include <octoon/physics_material2d.h>
 
 
 class b2Body;
@@ -29,7 +30,7 @@ namespace octoon
             b2Fixture *collider;
 
         private:
-
+            std::shared_ptr<PhysicsMaterial2D> shared_material; // The PhysicsMaterial2D that is applied to this collider.
             friend class Rigidbody2D;
     };
 }

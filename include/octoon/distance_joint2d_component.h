@@ -23,9 +23,9 @@ namespace octoon
             virtual GameComponentPtr clone() const noexcept;
         
         protected:
-            bool autoConfigureDistance; //Should the distance be calculated automatically?
+            bool auto_configure_distance; //Should the distance be calculated automatically?
             float distance; // The distance separating the two ends of the joint.
-            bool maxDistanceOnly; //Whether to maintain a maximum distance only or not. If not then the absolute distance will be maintained instead.
+            bool max_distance_only; //Whether to maintain a maximum distance only or not. If not then the absolute distance will be maintained instead.
 
         private:
             b2DistanceJoint *joint;
