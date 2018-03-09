@@ -19,6 +19,15 @@ namespace octoon
             AnchoredJoint2D() noexcept;
             ~AnchoredJoint2D();
             virtual GameComponentPtr clone() const noexcept;
+
+            void set_anchor(const math::Vector2& a) noexcept;
+            math::Vector2 get_anchor() const noexcept;
+
+            void set_auto_configure_connected_anchor(bool is_auto_configure) noexcept;
+            bool get_auto_configure_connected_anchor() const noexcept;
+
+            void set_connected_anchor(const math::Vector2& a) noexcept;
+            math::Vector2 get_connected_anchor() const noexcept;
         
         protected:
             math::Vector2 anchor; // The joint's anchor point on the object that has the joint component.

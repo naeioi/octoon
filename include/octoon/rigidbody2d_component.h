@@ -40,6 +40,9 @@ namespace octoon
             void set_gravity_scale(float scale) noexcept;
             float get_gravity_scale() const noexcept;
 
+            void set_mass(float m) noexcept;
+            float get_mass() const noexcept;
+
             void set_sleep_mode(RigidbodySleepMode2D mode) noexcept;
             RigidbodySleepMode2D get_sleep_mode() const noexcept;
 
@@ -68,6 +71,7 @@ namespace octoon
 
             float angular_velocity;
             float gravity_scale; // The degree to which this object is affected by gravity.
+            float mass; // Mass of the rigidbody.
             RigidbodySleepMode2D sleep_mode;
             math::Vector2 velocity;
             RigidbodyType2D body_type;

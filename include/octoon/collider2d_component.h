@@ -20,6 +20,15 @@ namespace octoon
             ~Collider2D();
             virtual GameComponentPtr clone() const noexcept;
 
+            void set_bounciness(float b) noexcept;
+            float get_bounciness() const noexcept;
+
+            void set_density(float d) noexcept;
+            float get_density() const noexcept;
+
+            void set_friction(float f) noexcept;
+            float get_friction() const noexcept;
+
         protected:
             virtual void on_collision_change() = 0;
             virtual void on_collision_enter() = 0;
@@ -30,6 +39,9 @@ namespace octoon
             b2Fixture *collider;
 
         private:
+            float bounciness; // Get the bounciness used by the collider.
+            float density; // The density of the collider used to calculate its mass (when auto mass is enabled).
+            float friction; // Get the friction used by the collider.
             std::shared_ptr<PhysicsMaterial2D> shared_material; // The PhysicsMaterial2D that is applied to this collider.
             friend class Rigidbody2D;
     };

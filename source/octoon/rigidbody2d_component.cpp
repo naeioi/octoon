@@ -45,6 +45,23 @@ namespace octoon
         return gravity_scale;
     }
 
+    void Rigidbody2D::set_mass(float m) noexcept
+    {
+        mass = m;
+        if(body)
+        {
+            b2MassData data;
+            body->GetMassData(&data);
+            data.mass = m;
+            body->SetMassData(&data);
+        }
+    }
+
+    float Rigidbody2D::get_mass() const noexcept
+    {
+        return mass;
+    }
+
     void Rigidbody2D::set_sleep_mode(RigidbodySleepMode2D mode) noexcept
     {
         sleep_mode = mode;
