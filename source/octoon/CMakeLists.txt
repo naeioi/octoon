@@ -58,6 +58,21 @@ SET(IO_FEATURES_LIST
 )
 SOURCE_GROUP("system\\io" FILES ${IO_FEATURES_LIST})
 
+SET(PHYSICS2D_FEATURES_LIST
+    ${HEADER_PATH}/physics2d_feature.h
+    ${SOURCE_PATH}/physics2d_feature.cpp
+    ${HEADER_PATH}/rigidbody2d_component.h
+    ${SOURCE_PATH}/rigidbody2d_component.cpp
+    ${HEADER_PATH}/collider2d_component.h
+    ${SOURCE_PATH}/collider2d_component.cpp
+    ${HEADER_PATH}/circle_collider2d_component.h
+    ${SOURCE_PATH}/circle_collider2d_component.cpp
+    ${HEADER_PATH}/polygon_collider2d_component.h
+    ${SOURCE_PATH}/polygon_collider2d_component.cpp
+
+)
+SOURCE_GROUP("system\\physics2d" FILES ${IO_FEATURES_LIST})
+
 INCLUDE_DIRECTORIES(${OCTOON_PATH_DEPENDENCIES}/Box2D)
 
 ADD_DEFINITIONS(-DOCTOON_BUILD_DLL_EXPORT)

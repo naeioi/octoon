@@ -17,11 +17,6 @@ namespace octoon
 
     }
 
-    GameComponentPtr Collider2D::clone() const noexcept
-    {
-        return std::make_shared<CircleCollider2D>();
-    }
-
     void Collider2D::set_bounciness(float b) noexcept
     {
         bounciness = b;

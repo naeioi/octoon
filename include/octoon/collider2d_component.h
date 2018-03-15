@@ -18,7 +18,6 @@ namespace octoon
         public:
             Collider2D() noexcept;
             ~Collider2D();
-            virtual GameComponentPtr clone() const noexcept;
 
             void set_bounciness(float b) noexcept;
             float get_bounciness() const noexcept;
