@@ -23,7 +23,9 @@ namespace octoon
             virtual GameComponentPtr clone() const noexcept;
         
         protected:
-    
+            virtual void on_joint_change() override;
+            virtual void on_joint_enter() override;
+            virtual void on_joint_exit() override;
         private:
             b2RevoluteJoint *joint;
 

@@ -15,4 +15,19 @@ namespace octoon
     {
 
     }
+
+    void FixedJoint2D::on_joint_change()
+    {
+
+    }
+
+    void FixedJoint2D::on_joint_enter()
+    {
+
+    }
+
+    void FixedJoint2D::on_joint_exit()
+    {
+
+    }
 }

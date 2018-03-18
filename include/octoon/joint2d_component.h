@@ -20,7 +20,9 @@ namespace octoon
             virtual GameComponentPtr clone() const noexcept;
         
         protected:
-
+            virtual void on_joint_change() = 0;
+            virtual void on_joint_enter() = 0;
+            virtual void on_joint_exit() = 0;
         private:
 
             friend class Rigidbody2D;
