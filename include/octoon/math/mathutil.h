@@ -176,6 +176,20 @@ namespace octoon
 		}
 
 		template<typename T, typename = std::enable_if_t<std::is_floating_point<T>::value>>
+		constexpr T frac(T v) noexcept
+		{
+			T intPart;
+			return std::modf(v, &intPart);
+		}
+
+		template<typename T, typename = std::enable_if_t<std::is_floating_point<T>::value>>
+		constexpr T fract(T v) noexcept
+		{
+			T intPart;
+			return std::modf(v, &intPart);
+		}
+
+		template<typename T, typename = std::enable_if_t<std::is_floating_point<T>::value>>
 		constexpr T fraction(T v) noexcept
 		{
 			T intPart;
@@ -200,6 +214,161 @@ namespace octoon
 		constexpr T unorm2snorm(T x) noexcept
 		{
 			return x * 2.0f - 1.0f;
+		}
+
+		inline float hash_float(float x, float y, float z) noexcept
+		{
+			return x + y * (1.0f / 255.0f) + z * (1.0f / 65025.0f);
+		}
+
+		inline double hash_double(double x, double y, double z) noexcept
+		{
+			return x + y * (1.0f / 255.0f) + z * (1.0f / 65025.0f);
+		}
+
+		inline float abs(float v) noexcept
+		{
+			return std::abs(v);
+		}
+
+		inline float cos(float v) noexcept
+		{
+			return std::cos(v);
+		}
+
+		inline float sin(float v) noexcept
+		{
+			return std::sin(v);
+		}
+
+		inline float tan(float v) noexcept
+		{
+			return std::tan(v);
+		}
+
+		inline float acos(float v) noexcept
+		{
+			return std::acos(v);
+		}
+
+		inline float asin(float v) noexcept
+		{
+			return std::asin(v);
+		}
+
+		inline float atan(float v) noexcept
+		{
+			return std::atan(v);
+		}
+
+		inline float pow(float a, float b) noexcept
+		{
+			return std::pow(a, b);
+		}
+
+		inline float exp(float v) noexcept
+		{
+			return std::exp(v);
+		}
+
+		inline float exp2(float v) noexcept
+		{
+			return std::exp2(v);
+		}
+
+		inline float log2(float v) noexcept
+		{
+			return std::log2(v);
+		}
+
+		inline float log10(float v) noexcept
+		{
+			return std::log10(v);
+		}
+
+		inline float floor(float v) noexcept
+		{
+			return std::floor(v);
+		}
+
+		inline float ceil(float v) noexcept
+		{
+			return std::ceil(v);
+		}
+
+		inline float round(float v) noexcept
+		{
+			return std::round(v);
+		}
+
+		inline double cos(double v) noexcept
+		{
+			return std::cos(v);
+		}
+
+		inline double sin(double v) noexcept
+		{
+			return std::sin(v);
+		}
+
+		inline double tan(double v) noexcept
+		{
+			return std::tan(v);
+		}
+
+		inline double acos(double v) noexcept
+		{
+			return std::acos(v);
+		}
+
+		inline double asin(double v) noexcept
+		{
+			return std::asin(v);
+		}
+
+		inline double atan(double v) noexcept
+		{
+			return std::atan(v);
+		}
+
+		inline double pow(double a, double b) noexcept
+		{
+			return std::pow(a, b);
+		}
+
+		inline double exp(double v) noexcept
+		{
+			return std::exp(v);
+		}
+
+		inline double exp2(double v) noexcept
+		{
+			return std::exp2(v);
+		}
+
+		inline double log2(double v) noexcept
+		{
+			return std::log2(v);
+		}
+
+		inline double log10(double v) noexcept
+		{
+			return std::log10(v);
+		}
+
+		inline double floor(double v) noexcept
+		{
+			return std::floor(v);
+		}
+
+		inline double ceil(double v) noexcept
+		{
+			return std::ceil(v);
+		}
+
+		inline double round(double v) noexcept
+		{
+			return std::round(v);
 		}
 
 		inline float fast_exp2(float x) noexcept
