@@ -2,8 +2,8 @@
 #define OCTOON_CIRCLE_COLLIDER2D_COMPONENT_H_
 
 #include <memory>
-#include <octoon/game_component.h>
-#include <octoon/collider2d_component.h>
+#include <octoon/gameComponent.h>
+#include <octoon/collider2dComponent.h>
 #include <octoon/math/math.h>
 
 class b2Body;
@@ -18,24 +18,24 @@ namespace octoon
             ~CircleCollider2D();
             virtual GameComponentPtr clone() const noexcept;
 
-            void set_radius(float r) noexcept;
-            float get_radius() const noexcept;
+            void setRadius(float r) noexcept;
+            float getRadius() const noexcept;
 
         protected:
-            virtual void on_collision_change() noexcept;
-            virtual void on_collision_enter() noexcept;
-            virtual void on_collision_exit() noexcept;
-            virtual void on_collision_stay() noexcept;
+            virtual void onCollisionChange() noexcept;
+            virtual void onCollisionEnter() noexcept;
+            virtual void onCollisionExit() noexcept;
+            virtual void onCollisionStay() noexcept;
 
         private:
-            virtual void on_attach() except;
-            virtual void on_detach() noexcept;
+            virtual void onAttach() except;
+            virtual void onDetach() noexcept;
 
-            virtual void on_attach_component(const GameComponentPtr& component) except;
-            virtual void on_detach_component(const GameComponentPtr& component) noexcept;
+            virtual void onAttachComponent(const GameComponentPtr& component) except;
+            virtual void onDetachComponent(const GameComponentPtr& component) noexcept;
 
         private:
-            bool is_registered;
+            bool isRegistered;
             float radius;
     };
 }

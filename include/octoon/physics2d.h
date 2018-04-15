@@ -8,8 +8,8 @@ namespace octoon
     class Physics2D
     {
         public:
-        static void set_gravity(const math::Vector2& g){gravity=g;}
-        static math::Vector2 get_gravity(){return gravity;}
+        static void setGravity(const math::Vector2& g){gravity=g;}
+        static math::Vector2 getGravity(){return gravity;}
 
 
 

@@ -2,9 +2,9 @@
 #define OCTOON_FIXED_JOINT2D_COMPONENT_H_
 
 #include <memory>
-#include <octoon/game_component.h>
-#include <octoon/anchored_joint2d_component.h>
-#include <octoon/joint2d_component.h>
+#include <octoon/gameComponent.h>
+#include <octoon/anchoredJoint2dComponent.h>
+#include <octoon/joint2dComponent.h>
 #include <octoon/math/math.h>
 
 
@@ -23,9 +23,9 @@ namespace octoon
             virtual GameComponentPtr clone() const noexcept;
         
         protected:
-            virtual void on_joint_change() override;
-            virtual void on_joint_enter() override;
-            virtual void on_joint_exit() override;
+            virtual void onJointChange() override;
+            virtual void onJointEnter() override;
+            virtual void onJointExit() override;
         private:
             b2RevoluteJoint *joint;
 

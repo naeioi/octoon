@@ -2,7 +2,7 @@
 #define OCTOON_JOINT2D_COMPONENT_H_
 
 #include <memory>
-#include <octoon/game_component.h>
+#include <octoon/gameComponent.h>
 #include <octoon/math/math.h>
 
 
@@ -20,9 +20,9 @@ namespace octoon
             virtual GameComponentPtr clone() const noexcept;
         
         protected:
-            virtual void on_joint_change() = 0;
-            virtual void on_joint_enter() = 0;
-            virtual void on_joint_exit() = 0;
+            virtual void onJointChange() = 0;
+            virtual void onJointEnter() = 0;
+            virtual void onJointExit() = 0;
         private:
 
             friend class Rigidbody2D;

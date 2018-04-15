@@ -1,5 +1,5 @@
-#include <octoon/fixed_joint2d_component.h>
-#include <octoon/rigidbody2d_component.h>
+#include <octoon/fixedJoint2dComponent.h>
+#include <octoon/rigidbody2dComponent.h>
 #include <Box2D/Box2D.h>
 
 
@@ -16,17 +16,17 @@ namespace octoon
 
     }
 
-    void FixedJoint2D::on_joint_change()
+    void FixedJoint2D::onJointChange()
     {
 
     }
 
-    void FixedJoint2D::on_joint_enter()
+    void FixedJoint2D::onJointEnter()
     {
 
     }
 
-    void FixedJoint2D::on_joint_exit()
+    void FixedJoint2D::onJointExit()
     {
 
     }

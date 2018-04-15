@@ -3,8 +3,8 @@
 
 #include <memory>
 #include <vector>
-#include <octoon/game_component.h>
-#include <octoon/collider2d_component.h>
+#include <octoon/gameComponent.h>
+#include <octoon/collider2dComponent.h>
 #include <octoon/math/math.h>
 #include <octoon/runtime/singleton.h>
 
@@ -34,47 +34,47 @@ namespace octoon
             ~Rigidbody2D();
             virtual GameComponentPtr clone() const noexcept;
 
-            void set_angular_velocity(float v) noexcept;
-            float get_angular_velocity() const noexcept;
+            void setAngularVelocity(float v) noexcept;
+            float getAngularVelocity() const noexcept;
 
-            void set_gravity_scale(float scale) noexcept;
-            float get_gravity_scale() const noexcept;
+            void setGravityScale(float scale) noexcept;
+            float getGravityScale() const noexcept;
 
-            void set_mass(float m) noexcept;
-            float get_mass() const noexcept;
+            void setMass(float m) noexcept;
+            float getMass() const noexcept;
 
-            void set_sleep_mode(RigidbodySleepMode2D mode) noexcept;
-            RigidbodySleepMode2D get_sleep_mode() const noexcept;
+            void setSleepMode(RigidbodySleepMode2D mode) noexcept;
+            RigidbodySleepMode2D getSleepMode() const noexcept;
 
-            void set_body_type(RigidbodyType2D type) noexcept;
-            RigidbodyType2D get_body_type() const noexcept;
+            void setBodyType(RigidbodyType2D type) noexcept;
+            RigidbodyType2D getBodyType() const noexcept;
 
-            void set_position(math::Vector2 pos) noexcept;
-            math::Vector2 get_position() const noexcept;
+            void setPosition(math::Vector2 pos) noexcept;
+            math::Vector2 getPosition() const noexcept;
 
-            void set_rotation(float delta) noexcept;
-            float get_rotation() const noexcept;
+            void setRotation(float delta) noexcept;
+            float getRotation() const noexcept;
 
         private:
-        	virtual void on_attach() except;
-            virtual void on_detach() noexcept;
+        	virtual void onAttach() except;
+            virtual void onDetach() noexcept;
 
-            virtual void on_attach_component(const GameComponentPtr& component) noexcept;
-            virtual void on_detach_component(const GameComponentPtr& component) noexcept;
+            virtual void onAttachComponent(const GameComponentPtr& component) noexcept;
+            virtual void onDetachComponent(const GameComponentPtr& component) noexcept;
 
-            void rigidbody_enter() noexcept;
-            void rigidbody_exit() noexcept;
-            void rigidbody_change() noexcept;
+            void rigidbodyEnter() noexcept;
+            void rigidbodyExit() noexcept;
+            void rigidbodyChange() noexcept;
 
         private:
             b2Body* body;
 
-            float angular_velocity;
-            float gravity_scale; // The degree to which this object is affected by gravity.
+            float angularVelocity;
+            float gravityScale; // The degree to which this object is affected by gravity.
             float mass; // Mass of the rigidbody.
-            RigidbodySleepMode2D sleep_mode;
+            RigidbodySleepMode2D sleepMode;
             math::Vector2 velocity;
-            RigidbodyType2D body_type;
+            RigidbodyType2D bodyType;
             math::Vector2 position;
             float rotation;
         

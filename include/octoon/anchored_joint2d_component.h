@@ -2,8 +2,8 @@
 #define OCTOON_ANCHORED_JOINT2D_COMPONENT_H_
 
 #include <memory>
-#include <octoon/game_component.h>
-#include <octoon/joint2d_component.h>
+#include <octoon/gameComponent.h>
+#include <octoon/joint2dComponent.h>
 #include <octoon/math/math.h>
 
 
@@ -20,24 +20,24 @@ namespace octoon
             ~AnchoredJoint2D();
             virtual GameComponentPtr clone() const noexcept;
 
-            void set_anchor(const math::Vector2& a) noexcept;
-            math::Vector2 get_anchor() const noexcept;
+            void setAnchor(const math::Vector2& a) noexcept;
+            math::Vector2 getAnchor() const noexcept;
 
-            void set_auto_configure_connected_anchor(bool is_auto_configure) noexcept;
-            bool get_auto_configure_connected_anchor() const noexcept;
+            void setAutoConfigureConnectedAnchor(bool isAutoConfigure) noexcept;
+            bool getAutoConfigureConnectedAnchor() const noexcept;
 
-            void set_connected_anchor(const math::Vector2& a) noexcept;
-            math::Vector2 get_connected_anchor() const noexcept;
+            void setConnectedAnchor(const math::Vector2& a) noexcept;
+            math::Vector2 getConnectedAnchor() const noexcept;
         
         protected:
-            virtual void on_joint_change() = 0;
-            virtual void on_joint_enter() = 0;
-            virtual void on_joint_exit() = 0;
+            virtual void onJointChange() = 0;
+            virtual void onJointEnter() = 0;
+            virtual void onJointExit() = 0;
 
         protected:
             math::Vector2 anchor; // The joint's anchor point on the object that has the joint component.
-            bool auto_configure_connected_anchor; // Should the connectedAnchor be calculated automatically?
-            math::Vector2 connected_anchor; // The joint's anchor point on the second object (ie, the one which doesn't have the joint component).
+            bool autoConfigureConnectedAnchor; // Should the connectedAnchor be calculated automatically?
+            math::Vector2 connectedAnchor; // The joint's anchor point on the second object (ie, the one which doesn't have the joint component).
 
         private:
             friend class Rigidbody2D;

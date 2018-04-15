@@ -1,5 +1,5 @@
-#include <octoon/polygon_collider2d_component.h>
-#include <octoon/rigidbody2d_component.h>
+#include <octoon/polygonCollider2dComponent.h>
+#include <octoon/rigidbody2dComponent.h>
 #include <Box2D/Box2D.h>
 
 
@@ -8,7 +8,7 @@ namespace octoon
     OctoonImplementSubClass(PolygonCollider2D, GameComponent, "PolygonCollider2D")
 
     PolygonCollider2D::PolygonCollider2D() noexcept
-        :is_registered(false)
+        :isRegistered(false)
     {
 
     }
@@ -20,49 +20,49 @@ namespace octoon
 
     GameComponentPtr PolygonCollider2D::clone() const noexcept
     {
-        return std::make_shared<PolygonCollider2D>();
+        return std::makeShared<PolygonCollider2D>();
     }
 
-    void PolygonCollider2D::set_auto_tiling(bool is_auto_tilling) noexcept
+    void PolygonCollider2D::setAutoTiling(bool isAutoTilling) noexcept
     {
-        auto_tiling = is_auto_tilling;
-        on_collision_change();
+        autoTiling = isAutoTilling;
+        onCollisionChange();
     }
 
-    bool PolygonCollider2D::get_auto_tiling() const noexcept
+    bool PolygonCollider2D::getAutoTiling() const noexcept
     {
-        return auto_tiling;
+        return autoTiling;
     }
 
-    void PolygonCollider2D::set_path_count(int n) noexcept
+    void PolygonCollider2D::setPathCount(int n) noexcept
     {
-        path_count = n;
-        on_collision_change();
+        pathCount = n;
+        onCollisionChange();
     }
 
-    int PolygonCollider2D::get_path_count() const noexcept
+    int PolygonCollider2D::getPathCount() const noexcept
     {
-        return path_count;
+        return pathCount;
     }
 
-    void PolygonCollider2D::set_points(const math::Vector2Array& pts) noexcept
+    void PolygonCollider2D::setPoints(const math::Vector2Array& pts) noexcept
     {
         points = pts;
-        on_collision_change();
+        onCollisionChange();
     }
 
-    math::Vector2Array PolygonCollider2D::get_points() const noexcept
+    math::Vector2Array PolygonCollider2D::getPoints() const noexcept
     {
         return points;
     }
 
-    void PolygonCollider2D::on_collision_change() noexcept
+    void PolygonCollider2D::onCollisionChange() noexcept
     {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
             return;
 
-        if(!is_registered)
+        if(!isRegistered)
             return;
 
         std::vector<b2Vec2> vertices(points.size());
@@ -70,20 +70,20 @@ namespace octoon
         {
             vertices[i].Set(points[i].x, points[i].y);
         }
-        b2PolygonShape shape_def;
-        shape_def.Set(vertices.data(), vertices.size());
+        b2PolygonShape shapeDef;
+        shapeDef.Set(vertices.data(), vertices.size());
 
-        b2FixtureDef fixture_def;
-        fixture_def.shape = &shape_def;
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &shapeDef;
         
-        rigid_body->body->DestroyFixture(collider);
-        collider = rigid_body->body->CreateFixture(&fixture_def);
+        rigidBody->body->DestroyFixture(collider);
+        collider = rigidBody->body->CreateFixture(&fixtureDef);
     }
 
-    void PolygonCollider2D::on_collision_enter() noexcept
+    void PolygonCollider2D::onCollisionEnter() noexcept
     {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
             return;
         
         std::vector<b2Vec2> vertices(points.size());
@@ -91,57 +91,57 @@ namespace octoon
         {
             vertices[i].Set(points[i].x, points[i].y);
         }
-        b2PolygonShape shape_def;
-        shape_def.Set(vertices.data(), vertices.size());
+        b2PolygonShape shapeDef;
+        shapeDef.Set(vertices.data(), vertices.size());
 
-        b2FixtureDef fixture_def;
-        fixture_def.shape = &shape_def;
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &shapeDef;
         
-        collider = rigid_body->body->CreateFixture(&fixture_def);
+        collider = rigidBody->body->CreateFixture(&fixtureDef);
 
-        is_registered = true;
+        isRegistered = true;
     }
 
-    void PolygonCollider2D::on_collision_exit() noexcept
+    void PolygonCollider2D::onCollisionExit() noexcept
     {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
             return;
 
-        if(!is_registered)
+        if(!isRegistered)
             return;
 
-        rigid_body->body->DestroyFixture(collider);
+        rigidBody->body->DestroyFixture(collider);
     }
 
-    void PolygonCollider2D::on_collision_stay() noexcept
+    void PolygonCollider2D::onCollisionStay() noexcept
     {
 
     }
 
-    void PolygonCollider2D::on_attach() except
+    void PolygonCollider2D::onAttach() except
     {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
             return;
 
-        on_collision_enter();
+        onCollisionEnter();
     }
 
-    void PolygonCollider2D::on_detach() noexcept
+    void PolygonCollider2D::onDetach() noexcept
     {
-        on_collision_exit();
+        onCollisionExit();
     }
 
-    void PolygonCollider2D::on_attach_component(const GameComponentPtr& component) except
+    void PolygonCollider2D::onAttachComponent(const GameComponentPtr& component) except
     {
-        if (component->is_a<Rigidbody2D>())
+        if (component->isA<Rigidbody2D>())
         {
-            on_collision_enter();
+            onCollisionEnter();
         }
     }
 
-    void PolygonCollider2D::on_detach_component(const GameComponentPtr& component) noexcept
+    void PolygonCollider2D::onDetachComponent(const GameComponentPtr& component) noexcept
     {
     }
 }

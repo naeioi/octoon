@@ -1,4 +1,4 @@
-#include <octoon/collider2d_component.h>
+#include <octoon/collider2dComponent.h>
 #include <Box2D/Box2D.h>
 
 
@@ -17,7 +17,7 @@ namespace octoon
 
     }
 
-    void Collider2D::set_bounciness(float b) noexcept
+    void Collider2D::setBounciness(float b) noexcept
     {
         bounciness = b;
         if(collider)
@@ -26,12 +26,12 @@ namespace octoon
         }
     }
 
-    float Collider2D::get_bounciness() const noexcept
+    float Collider2D::getBounciness() const noexcept
     {
         return bounciness;
     }
 
-    void Collider2D::set_density(float d) noexcept
+    void Collider2D::setDensity(float d) noexcept
     {
         density = d;
         if(collider)
@@ -40,12 +40,12 @@ namespace octoon
         }
     }
 
-    float Collider2D::get_density() const noexcept
+    float Collider2D::getDensity() const noexcept
     {
         return density;
     }
 
-    void Collider2D::set_friction(float f) noexcept
+    void Collider2D::setFriction(float f) noexcept
     {
         friction = f;
         if(collider)
@@ -54,7 +54,7 @@ namespace octoon
         }
     }
 
-    float Collider2D::get_friction() const noexcept
+    float Collider2D::getFriction() const noexcept
     {
         return friction;
     }

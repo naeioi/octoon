@@ -1,5 +1,5 @@
-#include <octoon/box_collider2d_component.h>
-#include <octoon/rigidbody2d_component.h>
+#include <octoon/boxCollider2dComponent.h>
+#include <octoon/rigidbody2dComponent.h>
 #include <Box2D/Box2D.h>
 
 
@@ -8,7 +8,7 @@ namespace octoon
     OctoonImplementSubClass(BoxCollider2D, Collider2D, "BoxCollider2D")
 
     BoxCollider2D::BoxCollider2D() noexcept
-        :is_registered(false)
+        :isRegistered(false)
     {
 
     }
@@ -20,120 +20,120 @@ namespace octoon
 
     GameComponentPtr BoxCollider2D::clone() const noexcept
     {
-        return std::make_shared<BoxCollider2D>();
+        return std::makeShared<BoxCollider2D>();
     }
 
-    void BoxCollider2D::set_auto_tiling(bool is_auto_tilling) noexcept
+    void BoxCollider2D::setAutoTiling(bool isAutoTilling) noexcept
     {
-        auto_tiling = is_auto_tilling;
-        on_collision_change();
+        autoTiling = isAutoTilling;
+        onCollisionChange();
     }
 
-    bool BoxCollider2D::get_auto_tiling() const noexcept
+    bool BoxCollider2D::getAutoTiling() const noexcept
     {
-        return auto_tiling;
+        return autoTiling;
     }
 
-    void BoxCollider2D::set_edge_radius(float r) noexcept
+    void BoxCollider2D::setEdgeRadius(float r) noexcept
     {
-        edge_radius = r;
-        on_collision_change();
+        edgeRadius = r;
+        onCollisionChange();
     }
 
-    float BoxCollider2D::get_edge_radius() const noexcept
+    float BoxCollider2D::getEdgeRadius() const noexcept
     {
-        return edge_radius;
+        return edgeRadius;
     }
 
-    void BoxCollider2D::set_size(const math::Vector2& s) noexcept
+    void BoxCollider2D::setSize(const math::Vector2& s) noexcept
     {
         size = s;
-        on_collision_change();
+        onCollisionChange();
     }
 
-    math::Vector2 BoxCollider2D::get_size() const noexcept
+    math::Vector2 BoxCollider2D::getSize() const noexcept
     {
         return size;
     }
 
-    void BoxCollider2D::on_collision_change() noexcept
+    void BoxCollider2D::onCollisionChange() noexcept
     {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
             return;
 
-        if(!is_registered)
-            return;
-        
-        b2PolygonShape shape_def;
-        shape_def.SetAsBox(size.x, size.y);
-        shape_def.m_radius = edge_radius;
-
-        b2FixtureDef fixture_def;
-        fixture_def.shape = &shape_def;
-        
-        rigid_body->body->DestroyFixture(collider);
-        collider = rigid_body->body->CreateFixture(&fixture_def);
-    }
-
-    void BoxCollider2D::on_collision_enter() noexcept
-    {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        if(!isRegistered)
             return;
         
-        b2PolygonShape shape_def;
-        shape_def.SetAsBox(size.x, size.y);
-        shape_def.m_radius = edge_radius;
+        b2PolygonShape shapeDef;
+        shapeDef.SetAsBox(size.x, size.y);
+        shapeDef.mRadius = edgeRadius;
 
-        b2FixtureDef fixture_def;
-        fixture_def.shape = &shape_def;
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &shapeDef;
         
-        collider = rigid_body->body->CreateFixture(&fixture_def);
-
-        is_registered = true;
+        rigidBody->body->DestroyFixture(collider);
+        collider = rigidBody->body->CreateFixture(&fixtureDef);
     }
 
-    void BoxCollider2D::on_collision_exit() noexcept
+    void BoxCollider2D::onCollisionEnter() noexcept
     {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
+            return;
+        
+        b2PolygonShape shapeDef;
+        shapeDef.SetAsBox(size.x, size.y);
+        shapeDef.mRadius = edgeRadius;
+
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &shapeDef;
+        
+        collider = rigidBody->body->CreateFixture(&fixtureDef);
+
+        isRegistered = true;
+    }
+
+    void BoxCollider2D::onCollisionExit() noexcept
+    {
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
             return;
 
-        if(!is_registered)
+        if(!isRegistered)
             return;
 
-        rigid_body->body->DestroyFixture(collider);
+        rigidBody->body->DestroyFixture(collider);
     }
 
-    void BoxCollider2D::on_collision_stay() noexcept
+    void BoxCollider2D::onCollisionStay() noexcept
     {
 
     }
 
-    void BoxCollider2D::on_attach() except
+    void BoxCollider2D::onAttach() except
     {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
             return;
 
-        on_collision_enter();
+        onCollisionEnter();
     }
 
-    void BoxCollider2D::on_detach() noexcept
+    void BoxCollider2D::onDetach() noexcept
     {
-        on_collision_exit();
+        onCollisionExit();
     }
 
-    void BoxCollider2D::on_attach_component(const GameComponentPtr& component) except
+    void BoxCollider2D::onAttachComponent(const GameComponentPtr& component) except
     {
-        if (component->is_a<Rigidbody2D>())
+        if (component->isA<Rigidbody2D>())
         {
-            on_collision_enter();
+            onCollisionEnter();
         }
     }
 
-    void BoxCollider2D::on_detach_component(const GameComponentPtr& component) noexcept
+    void BoxCollider2D::onDetachComponent(const GameComponentPtr& component) noexcept
     {
     }
 }

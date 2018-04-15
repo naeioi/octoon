@@ -1,5 +1,5 @@
-#include <octoon/edge_collider2d_component.h>
-#include <octoon/rigidbody2d_component.h>
+#include <octoon/edgeCollider2dComponent.h>
+#include <octoon/rigidbody2dComponent.h>
 #include <Box2D/Box2D.h>
 
 
@@ -8,7 +8,7 @@ namespace octoon
     OctoonImplementSubClass(EdgeCollider2D, Collider2D, "EdgeCollider2D")
 
     EdgeCollider2D::EdgeCollider2D() noexcept
-        :is_registered(false)
+        :isRegistered(false)
     {
 
     }
@@ -20,82 +20,60 @@ namespace octoon
 
     GameComponentPtr EdgeCollider2D::clone() const noexcept
     {
-        return std::make_shared<EdgeCollider2D>();
+        return std::makeShared<EdgeCollider2D>();
     }
 
-    void EdgeCollider2D::set_edge_count(int n) noexcept
+    void EdgeCollider2D::setEdgeCount(int n) noexcept
     {
-        edge_count = n;
-        on_collision_change();
+        edgeCount = n;
+        onCollisionChange();
     }
 
-    int EdgeCollider2D::get_edge_count() const noexcept
+    int EdgeCollider2D::getEdgeCount() const noexcept
     {
-        return edge_count;
+        return edgeCount;
     }
 
-    void EdgeCollider2D::set_point_count(int n) noexcept
+    void EdgeCollider2D::setPointCount(int n) noexcept
     {
-        point_count = n;
-        on_collision_change();
+        pointCount = n;
+        onCollisionChange();
     }
 
-    int EdgeCollider2D::get_point_count() const noexcept
+    int EdgeCollider2D::getPointCount() const noexcept
     {
-        return point_count;
+        return pointCount;
     }
 
-    void EdgeCollider2D::set_edge_radius(float r) noexcept
+    void EdgeCollider2D::setEdgeRadius(float r) noexcept
     {
-        edge_radius = r;
-        on_collision_change();
+        edgeRadius = r;
+        onCollisionChange();
     }
 
-    float EdgeCollider2D::get_edge_radius() const noexcept
+    float EdgeCollider2D::getEdgeRadius() const noexcept
     {
-        return edge_radius;
+        return edgeRadius;
     }
 
-    void EdgeCollider2D::set_points(const math::Vector2Array& pts) noexcept
+    void EdgeCollider2D::setPoints(const math::Vector2Array& pts) noexcept
     {
         points = pts;
-        on_collision_change();
+        onCollisionChange();
     }
 
-    math::Vector2Array EdgeCollider2D::get_points() const noexcept
+    math::Vector2Array EdgeCollider2D::getPoints() const noexcept
     {
         return points;
     }
 
-    void EdgeCollider2D::on_collision_change() noexcept
+    void EdgeCollider2D::onCollisionChange() noexcept
     {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
             return;
 
-        if(!is_registered)
-            return;
-        
-        std::vector<b2Vec2> vertices(points.size());
-        for (int i = 0; i != points.size(); ++i)
-        {
-            vertices[i].Set(points[i].x, points[i].y);
-        }
-        b2ChainShape shape_def;
-        shape_def.CreateChain(vertices.data(), vertices.size());
-        shape_def.m_radius = edge_radius;
-
-        b2FixtureDef fixture_def;
-        fixture_def.shape = &shape_def;
-        
-        rigid_body->body->DestroyFixture(collider);
-        collider = rigid_body->body->CreateFixture(&fixture_def);
-    }
-
-    void EdgeCollider2D::on_collision_enter() noexcept
-    {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        if(!isRegistered)
             return;
         
         std::vector<b2Vec2> vertices(points.size());
@@ -103,58 +81,80 @@ namespace octoon
         {
             vertices[i].Set(points[i].x, points[i].y);
         }
-        b2ChainShape shape_def;
-        shape_def.CreateChain(vertices.data(), vertices.size());
-        shape_def.m_radius = edge_radius;
+        b2ChainShape shapeDef;
+        shapeDef.CreateChain(vertices.data(), vertices.size());
+        shapeDef.mRadius = edgeRadius;
 
-        b2FixtureDef fixture_def;
-        fixture_def.shape = &shape_def;
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &shapeDef;
         
-        collider = rigid_body->body->CreateFixture(&fixture_def);
-
-        is_registered = true;
+        rigidBody->body->DestroyFixture(collider);
+        collider = rigidBody->body->CreateFixture(&fixtureDef);
     }
 
-    void EdgeCollider2D::on_collision_exit() noexcept
+    void EdgeCollider2D::onCollisionEnter() noexcept
     {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
             return;
-
-        if(!is_registered)
-            return;
-
-        rigid_body->body->DestroyFixture(collider);
-    }
-
-    void EdgeCollider2D::on_collision_stay() noexcept
-    {
-
-    }
-
-    void EdgeCollider2D::on_attach() except
-    {
-        auto rigid_body = get_component<Rigidbody2D>();
-        if (!rigid_body)
-            return;
-
-        on_collision_enter();
-    }
-
-    void EdgeCollider2D::on_detach() noexcept
-    {
-        on_collision_exit();
-    }
-
-    void EdgeCollider2D::on_attach_component(const GameComponentPtr& component) except
-    {
-        if (component->is_a<Rigidbody2D>())
+        
+        std::vector<b2Vec2> vertices(points.size());
+        for (int i = 0; i != points.size(); ++i)
         {
-            on_collision_enter();
+            vertices[i].Set(points[i].x, points[i].y);
+        }
+        b2ChainShape shapeDef;
+        shapeDef.CreateChain(vertices.data(), vertices.size());
+        shapeDef.mRadius = edgeRadius;
+
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &shapeDef;
+        
+        collider = rigidBody->body->CreateFixture(&fixtureDef);
+
+        isRegistered = true;
+    }
+
+    void EdgeCollider2D::onCollisionExit() noexcept
+    {
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
+            return;
+
+        if(!isRegistered)
+            return;
+
+        rigidBody->body->DestroyFixture(collider);
+    }
+
+    void EdgeCollider2D::onCollisionStay() noexcept
+    {
+
+    }
+
+    void EdgeCollider2D::onAttach() except
+    {
+        auto rigidBody = getComponent<Rigidbody2D>();
+        if (!rigidBody)
+            return;
+
+        onCollisionEnter();
+    }
+
+    void EdgeCollider2D::onDetach() noexcept
+    {
+        onCollisionExit();
+    }
+
+    void EdgeCollider2D::onAttachComponent(const GameComponentPtr& component) except
+    {
+        if (component->isA<Rigidbody2D>())
+        {
+            onCollisionEnter();
         }
     }
 
-    void EdgeCollider2D::on_detach_component(const GameComponentPtr& component) noexcept
+    void EdgeCollider2D::onDetachComponent(const GameComponentPtr& component) noexcept
     {
     }
 }

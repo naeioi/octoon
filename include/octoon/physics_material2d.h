@@ -2,7 +2,7 @@
 #define OCTOON_PHYSICS_MATERIAL2D_COMPONENT_H_
 
 #include <memory>
-#include <octoon/game_component.h>
+#include <octoon/gameComponent.h>
 #include <octoon/math/math.h>
 
 
@@ -18,11 +18,11 @@ namespace octoon
             PhysicsMaterial2D() noexcept;
             ~PhysicsMaterial2D();
 
-            void set_bounciness(float b) noexcept;
-            float get_bounciness() const noexcept;
+            void setBounciness(float b) noexcept;
+            float getBounciness() const noexcept;
 
-            void set_friction(float f) noexcept;
-            float get_friction() const noexcept;
+            void setFriction(float f) noexcept;
+            float getFriction() const noexcept;
         
         protected:
             float bounciness; // The degree of elasticity during collisions.

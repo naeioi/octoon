@@ -1,5 +1,5 @@
-#include <octoon/distance_joint2d_component.h>
-#include <octoon/rigidbody2d_component.h>
+#include <octoon/distanceJoint2dComponent.h>
+#include <octoon/rigidbody2dComponent.h>
 #include <Box2D/Box2D.h>
 
 
@@ -16,17 +16,17 @@ namespace octoon
 
     }
 
-    void DistanceJoint2D::set_auto_configure_distance(bool b) noexcept
+    void DistanceJoint2D::setAutoConfigureDistance(bool b) noexcept
     {
-        auto_configure_distance = b;
+        autoConfigureDistance = b;
     }
 
-    bool DistanceJoint2D::get_auto_configure_distance() const noexcept
+    bool DistanceJoint2D::getAutoConfigureDistance() const noexcept
     {
-        return auto_configure_distance;
+        return autoConfigureDistance;
     }
 
-    void DistanceJoint2D::set_distance(float d) noexcept
+    void DistanceJoint2D::setDistance(float d) noexcept
     {
         distance = d;
         b2DistanceJointDef jointDef;
@@ -34,31 +34,31 @@ namespace octoon
         jointDef.collideConnected = true;
     }
 
-    float DistanceJoint2D::get_distance() const noexcept
+    float DistanceJoint2D::getDistance() const noexcept
     {
         return distance;
     }
 
-    void DistanceJoint2D::set_max_distance_only(bool b) noexcept
+    void DistanceJoint2D::setMaxDistanceOnly(bool b) noexcept
     {
-        max_distance_only = b;
+        maxDistanceOnly = b;
     }
-    bool DistanceJoint2D::get_max_distance_only() const noexcept
+    bool DistanceJoint2D::getMaxDistanceOnly() const noexcept
     {
-        return max_distance_only;
-    }
-
-    void DistanceJoint2D::on_joint_change()
-    {
-
+        return maxDistanceOnly;
     }
 
-    void DistanceJoint2D::on_joint_enter()
+    void DistanceJoint2D::onJointChange()
     {
 
     }
 
-    void DistanceJoint2D::on_joint_exit()
+    void DistanceJoint2D::onJointEnter()
+    {
+
+    }
+
+    void DistanceJoint2D::onJointExit()
     {
 
     }

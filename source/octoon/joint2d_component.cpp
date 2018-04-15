@@ -1,5 +1,5 @@
-#include <octoon/joint2d_component.h>
-#include <octoon/rigidbody2d_component.h>
+#include <octoon/joint2dComponent.h>
+#include <octoon/rigidbody2dComponent.h>
 #include <Box2D/Box2D.h>
 
 

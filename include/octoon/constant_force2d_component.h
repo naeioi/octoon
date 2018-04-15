@@ -2,7 +2,7 @@
 #define OCTOON_CONSTANT_FORCE2D_COMPONENT_H_
 
 #include <memory>
-#include <octoon/game_component.h>
+#include <octoon/gameComponent.h>
 #include <octoon/math/math.h>
 
 

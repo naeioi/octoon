@@ -1,4 +1,4 @@
-#include <octoon/rigidbody2d_component.h>
+#include <octoon/rigidbody2dComponent.h>
 #include <Box2D/Box2D.h>
 
 
@@ -21,31 +21,31 @@ namespace octoon
 
     }
 
-    void Rigidbody2D::set_angular_velocity(float v) noexcept
+    void Rigidbody2D::setAngularVelocity(float v) noexcept
     {
-        angular_velocity = v;
+        angularVelocity = v;
         if(body)
-            body->SetAngularVelocity(angular_velocity);
+            body->SetAngularVelocity(angularVelocity);
     }
 
-    float Rigidbody2D::get_angular_velocity() const noexcept
+    float Rigidbody2D::getAngularVelocity() const noexcept
     {
-        return angular_velocity;
+        return angularVelocity;
     }
 
-    void Rigidbody2D::set_gravity_scale(float scale) noexcept
+    void Rigidbody2D::setGravityScale(float scale) noexcept
     {
-        gravity_scale = scale;
+        gravityScale = scale;
         if(body)
             body->SetGravityScale(scale);
     }
 
-    float Rigidbody2D::get_gravity_scale() const noexcept
+    float Rigidbody2D::getGravityScale() const noexcept
     {
-        return gravity_scale;
+        return gravityScale;
     }
 
-    void Rigidbody2D::set_mass(float m) noexcept
+    void Rigidbody2D::setMass(float m) noexcept
     {
         mass = m;
         if(body)
@@ -57,125 +57,125 @@ namespace octoon
         }
     }
 
-    float Rigidbody2D::get_mass() const noexcept
+    float Rigidbody2D::getMass() const noexcept
     {
         return mass;
     }
 
-    void Rigidbody2D::set_sleep_mode(RigidbodySleepMode2D mode) noexcept
+    void Rigidbody2D::setSleepMode(RigidbodySleepMode2D mode) noexcept
     {
-        sleep_mode = mode;
-        if(sleep_mode == RigidbodySleepMode2D::NeverSleep)
+        sleepMode = mode;
+        if(sleepMode == RigidbodySleepMode2D::NeverSleep)
         {
             body->SetSleepingAllowed(false);
         }
-        else if(sleep_mode == RigidbodySleepMode2D::StartAsleep)
+        else if(sleepMode == RigidbodySleepMode2D::StartAsleep)
         {
             body->SetSleepingAllowed(true);
         }
-        else if(sleep_mode == RigidbodySleepMode2D::StartAwake)
+        else if(sleepMode == RigidbodySleepMode2D::StartAwake)
         {
             body->SetSleepingAllowed(true);
         }
     }
 
-    RigidbodySleepMode2D Rigidbody2D::get_sleep_mode() const noexcept
+    RigidbodySleepMode2D Rigidbody2D::getSleepMode() const noexcept
     {
-        return sleep_mode;
+        return sleepMode;
     }
 
-    void Rigidbody2D::set_body_type(RigidbodyType2D type) noexcept
+    void Rigidbody2D::setBodyType(RigidbodyType2D type) noexcept
     {
-        body_type = type;
+        bodyType = type;
         if(body)
-            body->SetType(static_cast<b2BodyType>(type));
+            body->SetType(staticCast<b2BodyType>(type));
     }
 
-    RigidbodyType2D Rigidbody2D::get_body_type() const noexcept
+    RigidbodyType2D Rigidbody2D::getBodyType() const noexcept
     {
-        return body_type;
+        return bodyType;
     }
 
-    void Rigidbody2D::set_position(math::Vector2 pos) noexcept
+    void Rigidbody2D::setPosition(math::Vector2 pos) noexcept
     {
         position = pos;
         if(body)
             body->SetTransform(b2Vec2(pos.x, pos.y), rotation);
     }
 
-    math::Vector2 Rigidbody2D::get_position() const noexcept
+    math::Vector2 Rigidbody2D::getPosition() const noexcept
     {
         return position;
     }
 
-    void Rigidbody2D::set_rotation(float delta) noexcept
+    void Rigidbody2D::setRotation(float delta) noexcept
     {
         rotation = delta;
         if(body)
             body->SetTransform(b2Vec2(position.x, position.y), rotation);
     }
 
-    float Rigidbody2D::get_rotation() const noexcept
+    float Rigidbody2D::getRotation() const noexcept
     {
         return rotation;
     }
 
-    void Rigidbody2D::on_attach() except
+    void Rigidbody2D::onAttach() except
     {
-        add_component_dispatch(GameDispatchType::MoveAfter, this);
+        addComponentDispatch(GameDispatchType::MoveAfter, this);
         if(body == nullptr)
-            rigidbody_enter();
+            rigidbodyEnter();
     }
 
-    void Rigidbody2D::on_detach() noexcept
+    void Rigidbody2D::onDetach() noexcept
     {
-        remove_component_dispatch(GameDispatchType::MoveAfter, this);
+        removeComponentDispatch(GameDispatchType::MoveAfter, this);
     }
 
-    void Rigidbody2D::on_attach_component(const GameComponentPtr& component) noexcept
+    void Rigidbody2D::onAttachComponent(const GameComponentPtr& component) noexcept
     {
-        //if (component->is_a<Collider2D>())
-		//    component->downcast<Collider2D>()->addShapeChangeListener(&_onCollisionChange);
+        //if (component->isA<Collider2D>())
+		//    component->downcast<Collider2D>()->addShapeChangeListener(&OnCollisionChange);
     }
 
-    void Rigidbody2D::on_detach_component(const GameComponentPtr& component) noexcept
+    void Rigidbody2D::onDetachComponent(const GameComponentPtr& component) noexcept
     {
-        //if (component->is_a<Collider2D>())
-		//    component->downcast<Collider2D>()->removeShapeChangeListener(&_onCollisionChange);
+        //if (component->isA<Collider2D>())
+		//    component->downcast<Collider2D>()->removeShapeChangeListener(&OnCollisionChange);
     }
 
-    void Rigidbody2D::rigidbody_enter() noexcept
+    void Rigidbody2D::rigidbodyEnter() noexcept
     {
         b2World *world = runtime::Singleton<b2World>::instance();
 
-        b2BodyDef body_def;
-        body_def.type = (b2BodyType)get_body_type();
-        body_def.position.Set(get_position().x, get_position().y);
-        body_def.angularVelocity = angular_velocity;
-        body_def.linearVelocity = b2Vec2(velocity.x, velocity.y);
-        body_def.gravityScale = gravity_scale;
-        if(sleep_mode == RigidbodySleepMode2D::NeverSleep)
+        b2BodyDef bodyDef;
+        bodyDef.type = (b2BodyType)getBodyType();
+        bodyDef.position.Set(getPosition().x, getPosition().y);
+        bodyDef.angularVelocity = angularVelocity;
+        bodyDef.linearVelocity = b2Vec2(velocity.x, velocity.y);
+        bodyDef.gravityScale = gravityScale;
+        if(sleepMode == RigidbodySleepMode2D::NeverSleep)
         {
-            body_def.allowSleep = false;
+            bodyDef.allowSleep = false;
         }
-        else if(sleep_mode == RigidbodySleepMode2D::StartAsleep)
+        else if(sleepMode == RigidbodySleepMode2D::StartAsleep)
         {
-            body_def.allowSleep = true;
-            body_def.awake = false;
+            bodyDef.allowSleep = true;
+            bodyDef.awake = false;
         }
-        else if(sleep_mode == RigidbodySleepMode2D::StartAwake)
+        else if(sleepMode == RigidbodySleepMode2D::StartAwake)
         {
-            body_def.allowSleep = false;
-            body_def.awake = true;
+            bodyDef.allowSleep = false;
+            bodyDef.awake = true;
         }
-        body = world->CreateBody(&body_def);
+        body = world->CreateBody(&bodyDef);
     }
 
-    void Rigidbody2D::rigidbody_change() noexcept
+    void Rigidbody2D::rigidbodyChange() noexcept
     {
     }
 
-    void Rigidbody2D::rigidbody_exit() noexcept
+    void Rigidbody2D::rigidbodyExit() noexcept
     {
         b2World *world = runtime::Singleton<b2World>::instance();
 

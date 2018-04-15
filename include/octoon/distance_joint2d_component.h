@@ -2,9 +2,9 @@
 #define OCTOON_DISTANCE_JOINT2D_COMPONENT_H_
 
 #include <memory>
-#include <octoon/game_component.h>
-#include <octoon/anchored_joint2d_component.h>
-#include <octoon/joint2d_component.h>
+#include <octoon/gameComponent.h>
+#include <octoon/anchoredJoint2dComponent.h>
+#include <octoon/joint2dComponent.h>
 #include <octoon/math/math.h>
 
 
@@ -22,24 +22,24 @@ namespace octoon
             ~DistanceJoint2D();
             virtual GameComponentPtr clone() const noexcept;
         
-            void set_auto_configure_distance(bool b) noexcept;
-            bool get_auto_configure_distance() const noexcept;
+            void setAutoConfigureDistance(bool b) noexcept;
+            bool getAutoConfigureDistance() const noexcept;
 
-            void set_distance(float d) noexcept;
-            float get_distance() const noexcept;
+            void setDistance(float d) noexcept;
+            float getDistance() const noexcept;
 
-            void set_max_distance_only(bool b) noexcept;
-            bool get_max_distance_only() const noexcept;
+            void setMaxDistanceOnly(bool b) noexcept;
+            bool getMaxDistanceOnly() const noexcept;
 
         protected:
-            virtual void on_joint_change() override;
-            virtual void on_joint_enter() override;
-            virtual void on_joint_exit() override;
+            virtual void onJointChange() override;
+            virtual void onJointEnter() override;
+            virtual void onJointExit() override;
         
         protected:
-            bool auto_configure_distance; //Should the distance be calculated automatically?
+            bool autoConfigureDistance; //Should the distance be calculated automatically?
             float distance; // The distance separating the two ends of the joint.
-            bool max_distance_only; //Whether to maintain a maximum distance only or not. If not then the absolute distance will be maintained instead.
+            bool maxDistanceOnly; //Whether to maintain a maximum distance only or not. If not then the absolute distance will be maintained instead.
 
         private:
             b2DistanceJoint *joint;

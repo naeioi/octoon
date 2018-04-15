@@ -1,5 +1,5 @@
-#include <octoon/anchored_joint2d_component.h>
-#include <octoon/rigidbody2d_component.h>
+#include <octoon/anchoredJoint2dComponent.h>
+#include <octoon/rigidbody2dComponent.h>
 #include <Box2D/Box2D.h>
 
 
@@ -16,33 +16,33 @@ namespace octoon
 
     }
 
-    void AnchoredJoint2D::set_anchor(const math::Vector2& a) noexcept
+    void AnchoredJoint2D::setAnchor(const math::Vector2& a) noexcept
     {
         anchor = a;
     }
 
-    math::Vector2 AnchoredJoint2D::get_anchor() const noexcept
+    math::Vector2 AnchoredJoint2D::getAnchor() const noexcept
     {
         return anchor;
     }
 
-    void AnchoredJoint2D::set_auto_configure_connected_anchor(bool is_auto_configure) noexcept
+    void AnchoredJoint2D::setAutoConfigureConnectedAnchor(bool isAutoConfigure) noexcept
     {
-        auto_configure_connected_anchor = is_auto_configure;
+        autoConfigureConnectedAnchor = isAutoConfigure;
     }
 
-    bool AnchoredJoint2D::get_auto_configure_connected_anchor() const noexcept
+    bool AnchoredJoint2D::getAutoConfigureConnectedAnchor() const noexcept
     {
-        return auto_configure_connected_anchor;
+        return autoConfigureConnectedAnchor;
     }
 
-    void AnchoredJoint2D::set_connected_anchor(const math::Vector2& a) noexcept
+    void AnchoredJoint2D::setConnectedAnchor(const math::Vector2& a) noexcept
     {
-        connected_anchor = a;
+        connectedAnchor = a;
     }
 
-    math::Vector2 AnchoredJoint2D::get_connected_anchor() const noexcept
+    math::Vector2 AnchoredJoint2D::getConnectedAnchor() const noexcept
     {
-        return connected_anchor;
+        return connectedAnchor;
     }
 }
