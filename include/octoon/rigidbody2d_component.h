@@ -3,8 +3,8 @@
 
 #include <memory>
 #include <vector>
-#include <octoon/gameComponent.h>
-#include <octoon/collider2dComponent.h>
+#include <octoon/game_component.h>
+#include <octoon/collider2d_component.h>
 #include <octoon/math/math.h>
 #include <octoon/runtime/singleton.h>
 

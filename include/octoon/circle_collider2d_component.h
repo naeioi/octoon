@@ -2,8 +2,8 @@
 #define OCTOON_CIRCLE_COLLIDER2D_COMPONENT_H_
 
 #include <memory>
-#include <octoon/gameComponent.h>
-#include <octoon/collider2dComponent.h>
+#include <octoon/game_component.h>
+#include <octoon/collider2d_component.h>
 #include <octoon/math/math.h>
 
 class b2Body;

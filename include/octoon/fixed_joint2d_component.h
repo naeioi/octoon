@@ -2,9 +2,9 @@
 #define OCTOON_FIXED_JOINT2D_COMPONENT_H_
 
 #include <memory>
-#include <octoon/gameComponent.h>
-#include <octoon/anchoredJoint2dComponent.h>
-#include <octoon/joint2dComponent.h>
+#include <octoon/game_component.h>
+#include <octoon/anchored_joint2dComponent.h>
+#include <octoon/joint2d_component.h>
 #include <octoon/math/math.h>
 
 

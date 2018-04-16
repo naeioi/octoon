@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <octoon/gameFeature.h>
+#include <octoon/game_feature.h>
 
 class b2World;
 

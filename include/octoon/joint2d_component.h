@@ -2,7 +2,7 @@
 #define OCTOON_JOINT2D_COMPONENT_H_
 
 #include <memory>
-#include <octoon/gameComponent.h>
+#include <octoon/game_component.h>
 #include <octoon/math/math.h>
 
 
