@@ -8,7 +8,7 @@ namespace octoon
 	OctoonImplementSubClass(GameObject, runtime::RttiInterface, "Object")
 
 	GameObject::GameObject() noexcept
-		: active_(false)
+		: active_(true)
 		, layer_(0)
 	{
 		GameObjectManager::instance()->_instanceObject(this, instance_id_);
@@ -151,6 +151,7 @@ namespace octoon
 			if (parent)
 				parent->children_.push_back(this->downcast_pointer<GameObject>());
 
+			this->getComponent<TransformComponent>()->updateLocalChildren();
 			this->onMoveAfter();
 		}
 	}
@@ -300,6 +301,36 @@ namespace octoon
 	}
 
 	void
+	GameObject::removeComponent(const runtime::Rtti* type) noexcept
+	{
+		assert(type);
+
+		auto it = std::find_if(components_.begin(), components_.end(), [type](const GameComponentPtr& it) { return it->isA(type); });
+		if (it != components_.end())
+		{
+			components_.erase(it);
+
+			for (auto& compoent : components_)
+				compoent->onDetachComponent(*it);
+
+			for (auto& component : components_)
+				(*it)->onDetachComponent(component);
+
+			if (this->getActive() && (*it)->getActive())
+				(*it)->onDeactivate();
+
+			(*it)->onDetach();
+			(*it)->_setGameObject(nullptr);
+		}
+	}
+
+	void
+	GameObject::removeComponent(const runtime::Rtti& type) noexcept
+	{
+		this->removeComponent(&type);
+	}
+
+	void
 	GameObject::removeComponent(const GameComponentPtr& gameComponent) noexcept
 	{
 		assert(gameComponent);
@@ -322,7 +353,7 @@ namespace octoon
 			gameComponent->onDetach();
 			gameComponent->_setGameObject(nullptr);
 
-			this->removeComponentDispatchs(gameComponent);
+			this->removeComponentDispatchs(gameComponent.get());
 		}
 	}
 
@@ -346,7 +377,7 @@ namespace octoon
 			gameComponent->onDetach();
 			gameComponent->_setGameObject(nullptr);
 
-			this->removeComponentDispatchs(gameComponent);
+			this->removeComponentDispatchs(gameComponent.get());
 
 			it = nextComponent;
 		}
@@ -359,7 +390,7 @@ namespace octoon
 
 		for (auto& it : components_)
 		{
-			if (it->is_a(type))
+			if (it->isA(type))
 				return it;
 		}
 
@@ -379,7 +410,7 @@ namespace octoon
 
 		for (auto& it : components_)
 		{
-			if (it->is_a(type))
+			if (it->isA(type))
 				components.push_back(it);
 		}
 	}
@@ -399,7 +430,7 @@ namespace octoon
 		{
 			for (auto& component : it->components_)
 			{
-				if (component->is_a(type))
+				if (component->isA(type))
 					return component;
 			}
 
@@ -426,7 +457,7 @@ namespace octoon
 		{
 			for (auto& component : it->components_)
 			{
-				if (component->is_a(type))
+				if (component->isA(type))
 					components.push_back(component);
 			}
 
@@ -447,7 +478,7 @@ namespace octoon
 	}
 
 	void
-	GameObject::addComponentDispatch(GameDispatchTypes type, const GameComponentPtr& component) noexcept
+	GameObject::addComponentDispatch(GameDispatchTypes type, GameComponent* component) noexcept
 	{
 		assert(component);
 
@@ -476,7 +507,7 @@ namespace octoon
 	}
 
 	void
-	GameObject::removeComponentDispatch(GameDispatchTypes type, const GameComponentPtr& component) noexcept
+	GameObject::removeComponentDispatch(GameDispatchTypes type, const GameComponent* component) noexcept
 	{
 		assert(component);
 
@@ -506,7 +537,7 @@ namespace octoon
 	}
 
 	void
-	GameObject::removeComponentDispatchs(const GameComponentPtr& component) noexcept
+	GameObject::removeComponentDispatchs(const GameComponent* component) noexcept
 	{
 		assert(component);
 

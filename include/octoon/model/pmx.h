@@ -12,6 +12,9 @@ namespace octoon
 {
 	namespace model
 	{
+#ifndef MAX_PATH
+#	define MAX_PATH 256
+#endif
 
 #define PMX_VERSION_2_0   2.0
 #define PMX_BONE_INDEX    1 << 0
@@ -24,14 +27,14 @@ namespace octoon
 #define PMX_BONE_AXIS     1 << 10
 #define PMX_BONE_ROTATE   1 << 11
 
-		typedef octoon::math::Vector2  PmxVector2;
-		typedef octoon::math::Vector3  PmxVector3;
-		typedef octoon::math::Vector4  PmxVector4;
+		typedef math::Vector2  PmxVector2;
+		typedef math::Vector3  PmxVector3;
+		typedef math::Vector4  PmxVector4;
 
-		typedef octoon::math::Vector3  PmxColor3;
-		typedef octoon::math::Vector4  PmxColor4;
-		typedef octoon::math::float3x3 PmxFloat3x3;
-		typedef octoon::math::float4x4 PmxFloat4x4;
+		typedef math::Vector3  PmxColor3;
+		typedef math::Vector4  PmxColor4;
+		typedef math::float3x3 PmxFloat3x3;
+		typedef math::float4x4 PmxFloat4x4;
 
 		typedef wchar_t                PmxChar;
 		typedef std::int8_t            PmxInt8;
@@ -80,7 +83,6 @@ namespace octoon
 			std::vector<PmxChar> englishModelName;
 			std::vector<PmxChar> englishCommentName;
 		};
-
 
 		struct PmxBoneWeight
 		{
@@ -324,4 +326,3 @@ namespace octoon
 	}
 }
 #endif // !OCTOON_PMX_H_
-
