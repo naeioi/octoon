@@ -76,9 +76,6 @@ public:
 				octoon::imgui::color_picker3("side color", sideColor.ptr(), octoon::imgui::GuiColorEditFlagBits::HSV | octoon::imgui::GuiColorEditFlagBits::NoSidePreview);
 
 				material_->setLean(lern);
-				material_->setExtrude(extrude);
-				material_->setTextColor(octoon::video::TextColor::FrontColor, frontColor);
-				material_->setTextColor(octoon::video::TextColor::SideColor, sideColor);
 				material_->setTranslate(translate);
 
 				octoon::imgui::tree_pop();
@@ -125,7 +122,6 @@ int main(int argc, const char* argv[])
 	{
 		auto material = std::make_shared<octoon::video::TextMaterial>();
 		material->setLean(0.0f);
-		material->setExtrude(1.0f);
 		material->setTextColor(octoon::video::TextColor::FrontColor, octoon::math::float3(31.0, 179.0, 249.0) / 255.0f);
 		material->setTextColor(octoon::video::TextColor::SideColor, octoon::math::float3(0.0, 1.0, 0.0));
 

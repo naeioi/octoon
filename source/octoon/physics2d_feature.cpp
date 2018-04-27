@@ -11,8 +11,6 @@
 namespace octoon
 {
     OctoonImplementSubClass(Physics2DFeature, GameFeature, "Physics2DFeature")
-
-	std::shared_ptr<b2World> Physics2DFeature::world;
     
 	Physics2DFeature::Physics2DFeature() noexcept
 	{

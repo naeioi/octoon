@@ -1,4 +1,5 @@
 #include <octoon/rigidbody2d_component.h>
+#include <octoon/game_app.h>
 #include <Box2D/Box2D.h>
 
 
@@ -147,7 +148,7 @@ namespace octoon
 
     void Rigidbody2D::rigidbodyEnter() noexcept
     {
-        auto world = runtime::Singleton<Physics2DFeature>::instance()->getWorld();
+        auto world = runtime::Singleton<GameApp>::instance()->getFeature<Physics2DFeature>()->getWorld();
 
         b2BodyDef bodyDef;
         bodyDef.type = (b2BodyType)getBodyType();
@@ -178,7 +179,7 @@ namespace octoon
 
     void Rigidbody2D::rigidbodyExit() noexcept
     {
-		auto world = runtime::Singleton<Physics2DFeature>::instance()->getWorld();
+		auto world = runtime::Singleton<GameApp>::instance()->getFeature<Physics2DFeature>()->getWorld();
 
         if(body != nullptr)
             world->DestroyBody(body);
