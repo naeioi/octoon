@@ -1,4 +1,4 @@
-#include <octoon/rigidbody2dComponent.h>
+#include <octoon/rigidbody2d_component.h>
 #include <Box2D/Box2D.h>
 
 
@@ -88,7 +88,7 @@ namespace octoon
     {
         bodyType = type;
         if(body)
-            body->SetType(staticCast<b2BodyType>(type));
+            body->SetType(static_cast<b2BodyType>(type));
     }
 
     RigidbodyType2D Rigidbody2D::getBodyType() const noexcept
@@ -122,14 +122,14 @@ namespace octoon
 
     void Rigidbody2D::onAttach() except
     {
-        addComponentDispatch(GameDispatchType::MoveAfter, this);
+        addComponentDispatch(GameDispatchType::MoveAfter);
         if(body == nullptr)
             rigidbodyEnter();
     }
 
     void Rigidbody2D::onDetach() noexcept
     {
-        removeComponentDispatch(GameDispatchType::MoveAfter, this);
+        removeComponentDispatch(GameDispatchType::MoveAfter);
     }
 
     void Rigidbody2D::onAttachComponent(const GameComponentPtr& component) noexcept

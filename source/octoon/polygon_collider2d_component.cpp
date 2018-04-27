@@ -1,5 +1,5 @@
-#include <octoon/polygonCollider2dComponent.h>
-#include <octoon/rigidbody2dComponent.h>
+#include <octoon/polygon_collider2d_component.h>
+#include <octoon/rigidbody2d_component.h>
 #include <Box2D/Box2D.h>
 
 
@@ -20,7 +20,7 @@ namespace octoon
 
     GameComponentPtr PolygonCollider2D::clone() const noexcept
     {
-        return std::makeShared<PolygonCollider2D>();
+        return std::make_shared<PolygonCollider2D>();
     }
 
     void PolygonCollider2D::setAutoTiling(bool isAutoTilling) noexcept
