@@ -82,18 +82,6 @@ namespace octoon
 		GameServerPtr game_server_;
 		GameListenerPtr game_listener_;
 
-<<<<<<< HEAD:include/octoon/game_application.h
-		GameFeaturePtr io_feature_;
-		GameFeaturePtr timer_feature_;
-		GameFeaturePtr input_feature_;
-		GameFeaturePtr base_feature_;
-		GameFeaturePtr graphics_feature_;
-		GameFeaturePtr gui_feature_;
-		GameFeaturePtr video_feature_;
-		GameFeaturePtr physics2d_feature_;
-
-=======
->>>>>>> renderer:include/octoon/game_app.h
 		std::chrono::time_point<std::chrono::high_resolution_clock> start_time_;
 	};
 }
