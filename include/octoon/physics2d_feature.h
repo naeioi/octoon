@@ -41,7 +41,7 @@ namespace octoon
 		Physics2DFeature& operator=(const Physics2DFeature&) = delete;
 
 	private:
-		std::shared_ptr<b2World> world;
+		static std::shared_ptr<b2World> world;
     };
 }
 

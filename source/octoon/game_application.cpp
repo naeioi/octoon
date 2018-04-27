@@ -36,6 +36,10 @@
 #	include <octoon/video_feature.h>
 #endif
 
+#if OCTOON_FEATURE_PHYSICS2D_ENABLE
+#	include <octoon/physics2d_feature.h>
+#endif
+
 namespace octoon
 {
 	class GameAppListener final : public GameListener
@@ -108,6 +112,10 @@ namespace octoon
 		base_feature_ = std::make_shared<GameBaseFeatures>();
 #endif
 
+#if OCTOON_FEATURE_PHYSICS2D_ENABLE
+		physics2d_feature_ = std::make_shared<Physics2DFeature>();
+#endif
+
 #if OCTOON_FEATURE_BASE_ENABLE
 		graphics_feature_ = std::make_shared<GraphicsFeature>(hwnd, w, h);
 #endif
@@ -136,7 +144,11 @@ namespace octoon
 		this->addFeature(base_feature_);
 #endif
 
-#if OCTOON_FEATURE_VIDEO_ENABLE
+#if OCTOON_FEATURE_PHYSICS2D_ENABLE
+		this->addFeature(physics2d_feature_);
+#endif
+
+#if OCTOON_FEATURE_BASE_ENABLE
 		this->addFeature(graphics_feature_);
 #endif
 
