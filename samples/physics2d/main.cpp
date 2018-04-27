@@ -138,17 +138,16 @@ int main(int argc, const char* argv[])
 		camera->addComponent<octoon::FirstPersonCameraComponent>();
 		camera->getComponent<octoon::TransformComponent>()->setTranslate(octoon::math::float3(0, 0, 10));
 
-		auto cubeobject = std::make_shared<octoon::GameObject>();
-		cubeobject->addComponent<octoon::MeshFilterComponent>(octoon::model::makeCube(1.0, 1.0, 1.0));
-		cubeobject->addComponent<octoon::MeshRendererComponent>(material);
-		cubeobject->addComponent<octoon::Rigidbody2D>();
-		cubeobject->addComponent<CubeController>(camera, material);
+		auto cube_object = std::make_shared<octoon::GameObject>();
+		cube_object->addComponent<octoon::MeshFilterComponent>(octoon::model::makeCube(1.0, 1.0, 1.0));
+		cube_object->addComponent<octoon::MeshRendererComponent>(material);
+		cube_object->addComponent<octoon::Rigidbody2D>();
+		cube_object->addComponent<CubeController>(camera, material);
 
-		auto cubeobject = std::make_shared<octoon::GameObject>();
-		cubeobject->addComponent<octoon::MeshFilterComponent>(octoon::model::makePlane(1.0, 1.0, 5, 5));
-		cubeobject->addComponent<octoon::MeshRendererComponent>(material);
-		cubeobject->addComponent<octoon::Rigidbody2D>();
-		cubeobject->addComponent<PlaneController>(camera, material);
+		auto plane_object = std::make_shared<octoon::GameObject>();
+		plane_object->addComponent<octoon::MeshFilterComponent>(octoon::model::makePlane(1.0, 1.0, 5, 5));
+		plane_object->addComponent<octoon::MeshRendererComponent>(material);
+		plane_object->addComponent<octoon::Rigidbody2D>();
 
 		while (!::OctoonIsQuitRequest())
 			::OctoonUpdate();

@@ -18,6 +18,9 @@ namespace octoon
 		Physics2DFeature() noexcept;
 		virtual ~Physics2DFeature() noexcept;
 
+	public:
+		std::shared_ptr<b2World> getWorld() noexcept;
+
 	private:
 		virtual void onActivate() except override;
 		virtual void onDeactivate() noexcept override;
@@ -36,6 +39,9 @@ namespace octoon
 	private:
 		Physics2DFeature(const Physics2DFeature&) = delete;
 		Physics2DFeature& operator=(const Physics2DFeature&) = delete;
+
+	private:
+		std::shared_ptr<b2World> world;
     };
 }
 

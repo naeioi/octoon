@@ -1,5 +1,5 @@
-#include <octoon/boxCollider2dComponent.h>
-#include <octoon/rigidbody2dComponent.h>
+#include <octoon/box_collider2d_component.h>
+#include <octoon/rigidbody2d_component.h>
 #include <Box2D/Box2D.h>
 
 
@@ -20,7 +20,7 @@ namespace octoon
 
     GameComponentPtr BoxCollider2D::clone() const noexcept
     {
-        return std::makeShared<BoxCollider2D>();
+        return std::make_shared<BoxCollider2D>();
     }
 
     void BoxCollider2D::setAutoTiling(bool isAutoTilling) noexcept
@@ -67,7 +67,7 @@ namespace octoon
         
         b2PolygonShape shapeDef;
         shapeDef.SetAsBox(size.x, size.y);
-        shapeDef.mRadius = edgeRadius;
+        shapeDef.m_radius = edgeRadius;
 
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &shapeDef;
@@ -84,7 +84,7 @@ namespace octoon
         
         b2PolygonShape shapeDef;
         shapeDef.SetAsBox(size.x, size.y);
-        shapeDef.mRadius = edgeRadius;
+        shapeDef.m_radius = edgeRadius;
 
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &shapeDef;

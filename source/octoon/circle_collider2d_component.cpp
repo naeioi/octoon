@@ -1,5 +1,5 @@
-#include <octoon/circleCollider2dComponent.h>
-#include <octoon/rigidbody2dComponent.h>
+#include <octoon/circle_collider2d_component.h>
+#include <octoon/rigidbody2d_component.h>
 #include <Box2D/Box2D.h>
 
 
@@ -20,7 +20,7 @@ namespace octoon
 
     GameComponentPtr CircleCollider2D::clone() const noexcept
     {
-        return std::makeShared<CircleCollider2D>();
+        return std::make_shared<CircleCollider2D>();
     }
 
     void CircleCollider2D::setRadius(float r) noexcept
@@ -44,8 +44,8 @@ namespace octoon
             return;
         
         b2CircleShape shapeDef;
-        shapeDef.mP = b2Vec2(rigidBody->getPosition().x, rigidBody->getPosition().y);
-        shapeDef.mRadius = this->getRadius();
+        shapeDef.m_p = b2Vec2(rigidBody->getPosition().x, rigidBody->getPosition().y);
+        shapeDef.m_radius = this->getRadius();
 
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &shapeDef;
@@ -61,8 +61,8 @@ namespace octoon
             return;
         
         b2CircleShape shapeDef;
-        shapeDef.mP = b2Vec2(rigidBody->getPosition().x, rigidBody->getPosition().y);
-        shapeDef.mRadius = this->getRadius();
+        shapeDef.m_p = b2Vec2(rigidBody->getPosition().x, rigidBody->getPosition().y);
+        shapeDef.m_radius = this->getRadius();
 
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &shapeDef;

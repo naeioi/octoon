@@ -1,10 +1,10 @@
-#include <octoon/collider2dComponent.h>
+#include <octoon/collider2d_component.h>
 #include <Box2D/Box2D.h>
 
 
 namespace octoon
 {
-    OctoonImplementSubClass(Collider2D, GameComponent, "Collider2D")
+	OctoonImplementSubInterface(Collider2D, GameComponent, "Collider2D")
 
     Collider2D::Collider2D() noexcept
         :collider(nullptr)

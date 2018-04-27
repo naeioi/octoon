@@ -13,7 +13,7 @@ namespace octoon
 {
     class OCTOON_EXPORT PhysicsMaterial2D : public runtime::RttiInterface
 	{
-        OctoonDeclareSubInterface(PhysicsMaterial2D, runtime::RttiInterface)
+        OctoonDeclareSubClass(PhysicsMaterial2D, runtime::RttiInterface)
         public:
             PhysicsMaterial2D() noexcept;
             ~PhysicsMaterial2D();

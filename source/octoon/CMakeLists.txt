@@ -97,6 +97,8 @@ SET(IO_FEATURES_LIST
 SOURCE_GROUP("system\\io" FILES ${IO_FEATURES_LIST})
 
 SET(PHYSICS2D_FEATURES_LIST
+	${HEADER_PATH}/physics2d.h
+    ${SOURCE_PATH}/physics2d.cpp
     ${HEADER_PATH}/physics2d_feature.h
     ${SOURCE_PATH}/physics2d_feature.cpp
     ${HEADER_PATH}/rigidbody2d_component.h
@@ -107,7 +109,14 @@ SET(PHYSICS2D_FEATURES_LIST
     ${SOURCE_PATH}/circle_collider2d_component.cpp
     ${HEADER_PATH}/polygon_collider2d_component.h
     ${SOURCE_PATH}/polygon_collider2d_component.cpp
-
+	${HEADER_PATH}/edge_collider2d_component.h
+    ${SOURCE_PATH}/edge_collider2d_component.cpp
+	${HEADER_PATH}/box_collider2d_component.h
+    ${SOURCE_PATH}/box_collider2d_component.cpp
+	${HEADER_PATH}/joint2d_component.h
+    ${SOURCE_PATH}/joint2d_component.cpp
+	${HEADER_PATH}/physics_material2d.h
+    ${SOURCE_PATH}/physics_material2d.cpp
 )
 SOURCE_GROUP("system\\physics2d" FILES ${PHYSICS2D_FEATURES_LIST})
 

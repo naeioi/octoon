@@ -12,7 +12,7 @@ namespace octoon
 {
     class OCTOON_EXPORT EdgeCollider2D : public Collider2D
 	{
-        OctoonDeclareSubInterface(EdgeCollider2D, Collider2D)
+        OctoonDeclareSubClass(EdgeCollider2D, Collider2D)
         public:
             EdgeCollider2D() noexcept;
             ~EdgeCollider2D();

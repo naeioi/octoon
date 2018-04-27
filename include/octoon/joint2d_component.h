@@ -17,7 +17,7 @@ namespace octoon
         public:
             Joint2D() noexcept;
             ~Joint2D();
-            virtual GameComponentPtr clone() const noexcept;
+            virtual GameComponentPtr clone() const noexcept = 0;
         
         protected:
             virtual void onJointChange() = 0;

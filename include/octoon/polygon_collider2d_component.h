@@ -12,7 +12,7 @@ namespace octoon
 {
     class OCTOON_EXPORT PolygonCollider2D : public Collider2D
 	{
-        OctoonDeclareSubInterface(PolygonCollider2D, runtime::RttiInterface)
+        OctoonDeclareSubClass(PolygonCollider2D, runtime::RttiInterface)
         public:
             PolygonCollider2D() noexcept;
             ~PolygonCollider2D();

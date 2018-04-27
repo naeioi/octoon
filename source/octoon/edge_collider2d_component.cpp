@@ -1,5 +1,5 @@
-#include <octoon/edgeCollider2dComponent.h>
-#include <octoon/rigidbody2dComponent.h>
+#include <octoon/edge_collider2d_component.h>
+#include <octoon/rigidbody2d_component.h>
 #include <Box2D/Box2D.h>
 
 
@@ -20,7 +20,7 @@ namespace octoon
 
     GameComponentPtr EdgeCollider2D::clone() const noexcept
     {
-        return std::makeShared<EdgeCollider2D>();
+        return std::make_shared<EdgeCollider2D>();
     }
 
     void EdgeCollider2D::setEdgeCount(int n) noexcept
@@ -83,7 +83,7 @@ namespace octoon
         }
         b2ChainShape shapeDef;
         shapeDef.CreateChain(vertices.data(), vertices.size());
-        shapeDef.mRadius = edgeRadius;
+        shapeDef.m_radius = edgeRadius;
 
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &shapeDef;
@@ -105,7 +105,7 @@ namespace octoon
         }
         b2ChainShape shapeDef;
         shapeDef.CreateChain(vertices.data(), vertices.size());
-        shapeDef.mRadius = edgeRadius;
+        shapeDef.m_radius = edgeRadius;
 
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &shapeDef;

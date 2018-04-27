@@ -18,7 +18,8 @@ namespace octoon
 
 	GameComponentPtr Rigidbody2D::clone() const noexcept
     {
-
+		auto instance = std::make_shared<Rigidbody2D>();
+		return instance;
     }
 
     void Rigidbody2D::setAngularVelocity(float v) noexcept
@@ -146,7 +147,7 @@ namespace octoon
 
     void Rigidbody2D::rigidbodyEnter() noexcept
     {
-        b2World *world = runtime::Singleton<b2World>::instance();
+        auto world = runtime::Singleton<Physics2DFeature>::instance()->getWorld();
 
         b2BodyDef bodyDef;
         bodyDef.type = (b2BodyType)getBodyType();
@@ -177,7 +178,7 @@ namespace octoon
 
     void Rigidbody2D::rigidbodyExit() noexcept
     {
-        b2World *world = runtime::Singleton<b2World>::instance();
+		auto world = runtime::Singleton<Physics2DFeature>::instance()->getWorld();
 
         if(body != nullptr)
             world->DestroyBody(body);

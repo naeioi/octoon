@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <octoon/game_component.h>
+#include <octoon/physics2d_feature.h>
 #include <octoon/collider2d_component.h>
 #include <octoon/math/math.h>
 #include <octoon/runtime/singleton.h>
@@ -28,7 +29,7 @@ namespace octoon
 
     class OCTOON_EXPORT Rigidbody2D final : public GameComponent
 	{
-        OctoonDeclareSubInterface(Rigidbody2D, runtime::RttiInterface)
+		OctoonDeclareSubClass(Rigidbody2D, runtime::RttiInterface)
         public:
             Rigidbody2D() noexcept;
             ~Rigidbody2D();

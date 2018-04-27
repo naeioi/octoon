@@ -19,20 +19,20 @@ namespace octoon
             Collider2D() noexcept;
             ~Collider2D();
 
-            void set_bounciness(float b) noexcept;
-            float get_bounciness() const noexcept;
+            void setBounciness(float b) noexcept;
+            float getBounciness() const noexcept;
 
-            void set_density(float d) noexcept;
-            float get_density() const noexcept;
+            void setDensity(float d) noexcept;
+            float getDensity() const noexcept;
 
-            void set_friction(float f) noexcept;
-            float get_friction() const noexcept;
+            void setFriction(float f) noexcept;
+            float getFriction() const noexcept;
 
         protected:
-            virtual void on_collision_change() = 0;
-            virtual void on_collision_enter() = 0;
-            virtual void on_collision_exit() = 0;
-            virtual void on_collision_stay() = 0;
+            virtual void onCollisionChange() = 0;
+            virtual void onCollisionEnter() = 0;
+            virtual void onCollisionExit() = 0;
+            virtual void onCollisionStay() = 0;
         
         protected:
             b2Fixture *collider;
