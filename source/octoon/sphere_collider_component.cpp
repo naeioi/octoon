@@ -40,23 +40,6 @@ namespace octoon
         return radius;
     }
 
-    void SphereCollider::onCollisionChange() noexcept
-    {
-    }
-
-    void SphereCollider::onCollisionEnter() noexcept
-    {
-    }
-
-    void SphereCollider::onCollisionExit() noexcept
-    {
-    }
-
-    void SphereCollider::onCollisionStay() noexcept
-    {
-
-    }
-
     void SphereCollider::onAttach() except
     {
 		buildCollider();

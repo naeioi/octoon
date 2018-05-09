@@ -22,12 +22,6 @@ namespace octoon
 			void setMesh(model::MeshPtr m) noexcept;
 			model::MeshPtr getMesh() const noexcept;
 
-        protected:
-            virtual void onCollisionChange() noexcept;
-            virtual void onCollisionEnter() noexcept;
-            virtual void onCollisionExit() noexcept;
-            virtual void onCollisionStay() noexcept;
-
         private:
             virtual void onAttach() except;
             virtual void onDetach() noexcept;
@@ -37,6 +31,7 @@ namespace octoon
 
 			void buildCollider() except;
 			void releaseCollider() except;
+			void changeCollider() except;
         private:
 			model::MeshPtr sharedMesh; // The mesh object used for collision detection.
 			bool isConvex;

@@ -1,5 +1,6 @@
 #include <octoon/collider_component.h>
 #include <PxPhysicsAPI.h>
+#include "..\..\include\octoon\collider_component.h"
 
 namespace octoon
 {
@@ -16,22 +17,17 @@ namespace octoon
 	}
 
 	void
-	Collider::onCollisionChange()
+	Collider::OnCollisionEnter(Collision collision)
 	{
 	}
 
 	void
-	Collider::onCollisionEnter()
+	Collider::OnCollisionExit(Collision collision)
 	{
 	}
 
 	void
-	Collider::onCollisionExit()
-	{
-	}
-
-	void
-	Collider::onCollisionStay()
+	Collider::OnCollisionStay(Collision collision)
 	{
 	}
 

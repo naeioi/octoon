@@ -30,28 +30,13 @@ namespace octoon
 	void MeshCollider::setMesh(model::MeshPtr m) noexcept
 	{
 		sharedMesh = m;
+		changeCollider();
 	}
 
 	model::MeshPtr MeshCollider::getMesh() const noexcept
 	{
 		return sharedMesh;
 	}
-
-    void MeshCollider::onCollisionChange() noexcept
-    {
-    }
-
-    void MeshCollider::onCollisionEnter() noexcept
-    {
-    }
-
-    void MeshCollider::onCollisionExit() noexcept
-    {
-    }
-
-    void MeshCollider::onCollisionStay() noexcept
-    {
-    }
 
     void MeshCollider::onAttach() except
     {
@@ -79,9 +64,10 @@ namespace octoon
 
 	void MeshCollider::buildCollider() except
 	{
+		if (!sharedMesh) return;
 		auto physics_feature = GameApp::instance()->getFeature<PhysicsFeature>();
 
-		if (sharedMesh && isConvex)
+		if (isConvex)
 		{
 			physx::PxConvexMeshDesc convexDesc;
 			convexDesc.points.count = (physx::PxU32)sharedMesh->getNumVertices();
@@ -133,5 +119,54 @@ namespace octoon
 	{
 		shape->release(); // releases user reference, leaving reference count at 1
 		shape = nullptr;
+	}
+
+	void MeshCollider::changeCollider() except
+	{
+		if (!sharedMesh) return;
+		auto physics_feature = GameApp::instance()->getFeature<PhysicsFeature>();
+
+		if (isConvex)
+		{
+			physx::PxConvexMeshDesc convexDesc;
+			convexDesc.points.count = (physx::PxU32)sharedMesh->getNumVertices();
+			convexDesc.points.stride = sizeof(physx::PxVec3);
+			convexDesc.points.data = sharedMesh->getVertexArray().data();
+			convexDesc.flags = physx::PxConvexFlag::eCOMPUTE_CONVEX;
+
+			physx::PxDefaultMemoryOutputStream buf;
+			physx::PxConvexMeshCookingResult::Enum result;
+			if (!physics_feature->getCooking()->cookConvexMesh(convexDesc, buf, &result))
+				throw runtime::runtime_error::create("cook convex mesh failed!");
+
+			physx::PxDefaultMemoryInputData input(buf.getData(), buf.getSize());
+			physx::PxConvexMesh* convexMesh = physics_feature->getSDK()->createConvexMesh(input);
+
+			shape->setGeometry(physx::PxConvexMeshGeometry(convexMesh));
+		}
+		else
+		{
+			physx::PxTriangleMeshDesc meshDesc;
+			meshDesc.points.count = (physx::PxU32)sharedMesh->getNumVertices();
+			meshDesc.points.stride = sizeof(physx::PxVec3);
+			meshDesc.points.data = sharedMesh->getVertexArray().data();
+
+			meshDesc.triangles.count = (physx::PxU32)(sharedMesh->getNumIndices() / 3);
+			meshDesc.triangles.stride = 3 * sizeof(physx::PxU32);
+			meshDesc.triangles.data = sharedMesh->getIndicesArray().data();
+
+			physx::PxDefaultMemoryOutputStream writeBuffer;
+			physx::PxTriangleMeshCookingResult::Enum result;
+			bool status = physics_feature->getCooking()->cookTriangleMesh(meshDesc, writeBuffer, &result);
+			if (!status)
+				throw runtime::runtime_error::create("cook triangle mesh failed!");
+
+			physx::PxDefaultMemoryInputData readBuffer(writeBuffer.getData(), writeBuffer.getSize());
+
+			physx::PxTriangleMeshGeometry triGeom;
+			triGeom.triangleMesh = physics_feature->getSDK()->createTriangleMesh(readBuffer);
+
+			shape->setGeometry(triGeom);
+		}
 	}
 }

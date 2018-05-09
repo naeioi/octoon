@@ -6,6 +6,7 @@
 #include <octoon/game_component.h>
 #include <octoon/math/math.h>
 #include <octoon/physics_material.h>
+#include <octoon/collision.h>
 
 namespace physx
 {
@@ -27,10 +28,9 @@ namespace octoon
 		physx::PxShape* getShape() noexcept { return shape; }
 
 	protected:
-		virtual void onCollisionChange();
-		virtual void onCollisionEnter();
-		virtual void onCollisionExit();
-		virtual void onCollisionStay();
+		virtual void OnCollisionEnter(Collision collision); // OnCollisionEnter is called when this collider / rigidbody has begun touching another rigidbody / collider.
+		virtual void OnCollisionExit(Collision collision); // OnCollisionExit is called when this collider / rigidbody has stopped touching another rigidbody / collider.
+		virtual void OnCollisionStay(Collision collision); // OnCollisionStay is called once per frame for every collider / rigidbody that is touching rigidbody / collider.
 
 	protected:
 		physx::PxShape* shape;

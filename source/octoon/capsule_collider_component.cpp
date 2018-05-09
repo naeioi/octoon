@@ -56,22 +56,6 @@ namespace octoon
 		return halfHeight;
 	}
 
-    void CapsuleCollider::onCollisionChange() noexcept
-    {
-    }
-
-    void CapsuleCollider::onCollisionEnter() noexcept
-    {
-    }
-
-    void CapsuleCollider::onCollisionExit() noexcept
-    {
-    }
-
-    void CapsuleCollider::onCollisionStay() noexcept
-    {
-    }
-
     void CapsuleCollider::onAttach() except
     {
 		buildCollider();

@@ -21,12 +21,6 @@ namespace octoon
             void setRadius(float r) noexcept;
             float getRadius() const noexcept;
 
-        protected:
-            virtual void onCollisionChange() noexcept;
-            virtual void onCollisionEnter() noexcept;
-            virtual void onCollisionExit() noexcept;
-            virtual void onCollisionStay() noexcept;
-
         private:
             virtual void onAttach() except;
             virtual void onDetach() noexcept;

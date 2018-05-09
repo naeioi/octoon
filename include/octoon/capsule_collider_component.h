@@ -24,12 +24,6 @@ namespace octoon
 			void setHalfHeight(float h) except;
 			float getHalfHeight() const except;
 
-        protected:
-            virtual void onCollisionChange() noexcept;
-            virtual void onCollisionEnter() noexcept;
-            virtual void onCollisionExit() noexcept;
-            virtual void onCollisionStay() noexcept;
-
         private:
             virtual void onAttach() except;
             virtual void onDetach() noexcept;
