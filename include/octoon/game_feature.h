@@ -21,7 +21,7 @@ namespace octoon
 		T* getFeature() const noexcept { return dynamic_cast<T*>(this->getFeature(T::RTTI)); }
 		GameFeature* getFeature(const runtime::Rtti* rtti) const noexcept;
 		GameFeature* getFeature(const runtime::Rtti& rtti) const noexcept;
-		const GameFeatures& getFeaturs() const noexcept;
+		const GameFeatures& getFeatures() const noexcept;
 
 		GameServer* getGameServer() noexcept;
 

@@ -6,6 +6,7 @@
 
 namespace octoon
 {
+    class Collider;
     class ContactPoint
     {
     public:

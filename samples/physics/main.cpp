@@ -1,4 +1,5 @@
 #include <octoon/octoon.h>
+#include <octoon/octoon-c.h>
 
 #include <octoon/video/blinn_material.h>
 #include <octoon/game_object.h>
@@ -53,7 +54,7 @@ public:
 			{
 				auto transform = this->getComponent<octoon::TransformComponent>();
 				octoon::math::float3 matrixTranslation = transform->getTranslate();
-				octoon::math::float3 matrixRotation = octoon::math::degress(octoon::math::euler_angles(transform->getQuaternion()));
+				octoon::math::float3 matrixRotation = octoon::math::degress(octoon::math::eulerAngles(transform->getQuaternion()));
 				octoon::math::float3 matrixScale = transform->getScale();
 
 				octoon::imgui::drag_float3("Tr", matrixTranslation.ptr(), 3);
@@ -194,8 +195,7 @@ int main(int argc, const char* argv[])
 			transform_component->setTranslate(octoon::math::Vector3(0.f, -5.f, 0.f));
 		}
 
-		while (!::OctoonIsQuitRequest())
-			::OctoonUpdate();
+		::OctoonMainLoop();
 	}
 
 	::OctoonTerminate();

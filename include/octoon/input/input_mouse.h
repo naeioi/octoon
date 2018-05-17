@@ -72,8 +72,6 @@ namespace octoon
 			InputButton::Type centerX_;
 			InputButton::Type centerY_;
 
-			bool isMousePositionUpdated_;
-
 			struct ButtonState
 			{
 				bool down;

@@ -127,7 +127,7 @@ namespace octoon
 #endif
 
 #if OCTOON_FEATURE_PHYSICS_ENABLE
-		this->addFeature(std::make_shared<PhysicsFeature>());
+		this->addFeature(std::make_unique<PhysicsFeature>());
 #endif
 	}
 

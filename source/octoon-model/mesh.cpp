@@ -1465,11 +1465,7 @@ namespace octoon
 		Mesh::computeBoundingBox() noexcept
 		{
 			_boundingBox.reset();
-
-			if (_indices.empty())
-				_boundingBox.encapsulate(_vertices.data(), _vertices.size());
-			else
-				_boundingBox.encapsulate(_vertices.data(), _indices.data(), _indices.size());
+			_boundingBox.encapsulate(_vertices.data(), _vertices.size());
 		}
 	}
 }

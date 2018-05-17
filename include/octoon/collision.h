@@ -3,10 +3,13 @@
 
 #include <octoon/contact_point.h>
 #include <octoon/rigidbody_component.h>
+#include <octoon/collider_component.h>
 #include <octoon/transform_component.h>
 
 namespace octoon
 {
+    class Collider;
+    class Rigidbody;
     class Collision
     {
     public:
