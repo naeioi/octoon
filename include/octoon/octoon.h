@@ -19,6 +19,11 @@
 #include <octoon/camera_component.h>
 #include <octoon/mesh_renderer_component.h>
 
+#include <octoon/box_collider_component.h>
+#include <octoon/sphere_collider_component.h>
+#include <octoon/capsule_collider_component.h>
+#include <octoon/mesh_collider_component.h>
+
 #include <octoon/model/text_meshing.h>
 #include <octoon/res_manager.h>
 #include <octoon/ui/imgui.h>
