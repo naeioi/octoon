@@ -18,16 +18,13 @@ namespace octoon
 			precision mediump float;
 			uniform mat4 proj;
 			uniform mat4 model;
-
 			attribute vec4 POSITION0;
 			attribute vec4 NORMAL0;
-
 			varying vec3 oTexcoord0;
 			varying vec3 oTexcoord1;
-
 			void main()
 			{
-				oTexcoord0 = normalize(mat3(model) * NORMAL0.xyz);
+				oTexcoord0 = normalize(NORMAL0.xyz);
 				oTexcoord1 = normalize(POSITION0.xyz);
 				gl_Position = proj * model * POSITION0;
 			})";
@@ -38,22 +35,17 @@ namespace octoon
 			uniform vec3 baseColor;
 			uniform vec3 ambientColor;
 			uniform float shininess;
-
 			varying vec3 oTexcoord0;
 			varying vec3 oTexcoord1;
-
 			void main()
 			{
 				vec3 ambient = pow(ambientColor, vec3(2.2));
 				vec3 base = pow(baseColor, vec3(2.2));
-
 				vec3 N = normalize(oTexcoord0);
 				vec3 V = normalize(oTexcoord1);
 				vec3 H = normalize(V + lightDir);
-
 				float nl = max(0.0f, dot(N, lightDir));
-				float spec = pow(max(0, dot(N, H)), pow(8192, shininess));
-
+				float spec = pow(max(0, dot(N, H)), pow(4096, shininess));
 				gl_FragColor = vec4(pow(ambient + (base + spec) * nl, vec3(1.0 / 2.2)), 1.0);
 			})";
 

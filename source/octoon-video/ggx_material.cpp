@@ -18,13 +18,10 @@ namespace octoon
 			precision mediump float;
 			uniform mat4 proj;
 			uniform mat4 model;
-
 			attribute vec4 POSITION0;
 			attribute vec4 NORMAL0;
-
 			varying vec3 oTexcoord0;
 			varying vec3 oTexcoord1;
-
 			void main()
 			{
 				oTexcoord0 = normalize(mat3(model) * NORMAL0.xyz);
@@ -34,49 +31,37 @@ namespace octoon
 
 			const char* frag = R"(
 			precision mediump float;
-
 			uniform vec3 lightDir;
 			uniform vec3 baseColor;
 			uniform vec3 specularColor;
 			uniform vec3 ambientColor;
-
 			uniform float smoothness;
 			uniform float metalness;
-
 			varying vec3 oTexcoord0;
 			varying vec3 oTexcoord1;
-
 			void main()
 			{
 				vec3 ambient = pow(ambientColor, vec3(2.2));
 				vec3 base = pow(baseColor, vec3(2.2));
 				vec3 specular = pow(specularColor, vec3(2.2)) * 0.04;
-
 				vec3 N = normalize(oTexcoord0);
 				vec3 V = normalize(oTexcoord1);
 				vec3 H = normalize(V + lightDir);
-
 				float nl = max(0.0, dot(N, lightDir));
 				float nv = max(0.0, dot(N, V));
 				float nh = max(0.0, dot(N, H));
 				float vh = max(0.0, dot(V, H));
-
 				float roughness = max(1e-4, (1.0 - smoothness) * (1.0 - smoothness));
 				float m2 = roughness * roughness;
-
 				float spec = (nh * m2 - nh) * nh + 1.0;
 				spec = m2 / (spec * spec);
-
 				float Gv = nl * (nv * (1.0 - roughness) + roughness);
 				float Gl = nv * (nl * (1.0 - roughness) + roughness);
 				spec *= 0.5 / (Gv + Gl);
-
 				vec3 f0 = mix(specular, base, vec3(metalness));
 				vec3 f90 = vec3(clamp(dot(f0, vec3(0.33333)) * 50.0, 0.0, 1.0));
 				vec3 fresnel = mix(f0, f90, vec3(pow(1.0 - vh, 5.0)));
-
 				vec3 diffuse = mix(base, vec3(0.0), vec3(metalness));
-
 				gl_FragColor = vec4(pow(ambient + (diffuse + spec * fresnel) * nl, vec3(1.0 / 2.2)), 1.0);
 			})";
 

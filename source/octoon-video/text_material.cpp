@@ -22,24 +22,19 @@ namespace octoon
 			uniform vec3 frontColor;
 			uniform vec3 sideColor;
 			uniform vec3 translate;
-
 			attribute vec4 POSITION0;
 			attribute vec4 NORMAL0;
-
 			varying vec3 oTexcoord0;
-
 			void main()
 			{
 				vec4 P = POSITION0;
 				P.x -= P.y * lean;
 				if (P.z == 0.0)
 					P.xyz += translate;
-
 				if (abs(NORMAL0.z) > 0.5)
 					oTexcoord0 = frontColor;
 				else
 					oTexcoord0 = sideColor;
-
 				gl_Position = proj * model * P;
 			})";
 
