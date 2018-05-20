@@ -11,6 +11,8 @@ SET(PHYSICS_LIST
 	${SOURCE_PATH}/physics_rigidbody.cpp
 	${HEADER_PATH}/physics_scene.h
 	${SOURCE_PATH}/physics_scene.cpp
+	${HEADER_PATH}/physics_system.h
+	${SOURCE_PATH}/physics_system.cpp
 	${HEADER_PATH}/physics_types.h
 )
 SOURCE_GROUP(${LIB_NAME} FILES ${PHYSICS_LIST})
