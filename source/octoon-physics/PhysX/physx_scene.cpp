@@ -6,11 +6,7 @@ namespace octoon
     {
         OctoonImplementSubInterface(PhysxScene, PhysicsScene, "PhysxScene")
         PhysxScene::PhysxScene() except
-            :defaultErrorCallback(std::make_unique<physx::PxDefaultErrorCallback>()),
-            defaultAllocatorCallback(std::make_unique<physx::PxDefaultAllocator>()),
-            foundation(nullptr), pvd(nullptr),
-            physics(nullptr), cooking(nullptr),
-            dispatcher(nullptr), physicsScene(nullptr),
+            : physicsScene(nullptr),
             accumulator(0.0f), stepSize(1.0f / 60.0f)
         {
 

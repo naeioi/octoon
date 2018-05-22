@@ -33,11 +33,6 @@ namespace octoon
         public:
             PhysxSystem() except;
             virtual ~PhysxSystem() noexcept;
-
-            virtual void setGravity(const math::Vector3& gravity) noexcept;
-            virtual math::Vector3 getGravity() const noexcept;
-
-            virtual void simulation(float delta) noexcept;
         protected:
             bool recordMemoryAllocations = true;
 
@@ -48,10 +43,6 @@ namespace octoon
             physx::PxPhysics* physics;
             physx::PxCooking* cooking;
             physx::PxDefaultCpuDispatcher* dispatcher;
-            physx::PxScene* physicsScene;
-
-            float accumulator;
-            float stepSize;
         };
     }
 }
