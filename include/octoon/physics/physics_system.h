@@ -6,6 +6,9 @@
 #include <octoon/runtime/rtti_interface.h>
 #include <octoon/math/math.h>
 
+#include <octoon/physics/physics_scene.h>
+#include <octoon/physics/physics_rigidbody.h>
+
 namespace octoon
 {
     namespace physics
@@ -16,6 +19,9 @@ namespace octoon
         public:
             PhysicsSystem() noexcept;
             virtual ~PhysicsSystem() noexcept;
+
+            virtual PhysicsScene * createScene() except;
+            virtual PhysicsRigidbody * createRigidbody() except;
         };
     }
 }
