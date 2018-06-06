@@ -15,7 +15,12 @@
 #include <octoon/fixed_joint_component.h>
 #include <octoon/spring_joint_component.h>
 
+#include <octoon/runtime/sigslot.h>
+
 #include <octoon/ui/imgui.h>
+
+#include <iostream>
+#include <type_traits>
 
 class CubeController : public octoon::GameComponent
 {

@@ -128,7 +128,7 @@ namespace octoon
 
 			for (auto& contour : contours)
 			{
-				std::size_t written = 0;
+				const Contour& contour = group.at(i);
 
 				for (std::size_t n = 0; n < contour->count(); ++n)
 				{
