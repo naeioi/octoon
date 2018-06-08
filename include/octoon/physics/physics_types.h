@@ -3,11 +3,13 @@
 
 #include <octoon/runtime/platform.h>
 
+#include <octoon/physics/physics_scene.h>
+
 namespace octoon
 {
     namespace physics
     {
-
+        using PhysicsScenePtr = PhysicsScene*;
     }
 }
 
