@@ -36,10 +36,6 @@
 #	include <octoon/video_feature.h>
 #endif
 
-#if OCTOON_FEATURE_PHYSICS_ENABLE
-#	include <octoon/physics_feature.h>
-#endif
-
 namespace octoon
 {
 	OctoonImplementSingleton(GameApp)

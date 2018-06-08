@@ -25,6 +25,7 @@
 #include <octoon/mesh_collider_component.h>
 
 #include <octoon/model/text_meshing.h>
+#include <octoon/model/property.h>
 #include <octoon/res_manager.h>
 #include <octoon/ui/imgui.h>
 

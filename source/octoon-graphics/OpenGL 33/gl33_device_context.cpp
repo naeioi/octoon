@@ -579,6 +579,9 @@ namespace octoon
 
 			glBlitFramebuffer((GLint)v1.left, (GLint)v1.top, (GLint)v1.width, (GLint)v1.height, (GLint)v2.left, (GLint)v2.top, (GLint)v2.width, (GLint)v2.height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
+			glBindFramebuffer(GL_READ_FRAMEBUFFER, GL_NONE);
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, GL_NONE);
+
 			_framebuffer = nullptr;
 		}
 
@@ -737,7 +740,9 @@ namespace octoon
 				{
 					if (startVertice == 0)
 					{
-						if (glDrawElementsInstanced)
+						if (numInstances == 1)
+							glDrawElements(drawType, numIndices, _indexType, offsetIndices);
+						else if (glDrawElementsInstanced)
 							glDrawElementsInstanced(drawType, numIndices, _indexType, offsetIndices, numInstances);
 						else
 							this->getDevice()->downcast<OGLDevice>()->message("Cannot support glDrawElementsInstanced.");

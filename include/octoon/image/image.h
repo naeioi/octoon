@@ -44,7 +44,7 @@ namespace octoon
 			std::uint32_t layerBase() const noexcept;
 			std::uint32_t layerLevel() const noexcept;
 
-			const char* data() const noexcept;
+			const std::uint8_t* data() const noexcept;
 
 		public:
 			bool load(istream& stream, const char* type = nullptr) noexcept;
@@ -53,7 +53,7 @@ namespace octoon
 
 			bool save(ostream& stream, const char* type = "tga") noexcept;
 			bool save(const char* filepath, const char* type = "tga") noexcept;
-			bool save(const std::string& filepath, const char* type = nullptr) noexcept;
+			bool save(const std::string& filepath, const char* type = "tga") noexcept;
 
 		private:
 			Format format_;
@@ -68,7 +68,7 @@ namespace octoon
 			std::uint32_t layerBase_;
 			std::uint32_t layerLevel_;
 
-			std::vector<char> data_;
+			std::vector<std::uint8_t> data_;
 		};
 	}
 }

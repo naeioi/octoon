@@ -11,7 +11,6 @@ SET(CORE_LIST
 	${HEADER_PATH}/assert.h
 	${HEADER_PATH}/platform.h
 	${HEADER_PATH}/singleton.h
-	${HEADER_PATH}/sigslot.h
 	${HEADER_PATH}/rtti.h
 	${SOURCE_PATH}/rtti.cpp
 	${HEADER_PATH}/rtti_interface.h
@@ -29,6 +28,7 @@ SET(CORE_LIST
 	${SOURCE_PATH}/string.cpp
 	${HEADER_PATH}/uuid.h
 	${SOURCE_PATH}/uuid.cpp
+	${HEADER_PATH}/sigslot.h
 )
 SOURCE_GROUP(${LIB_NAME} FILES ${CORE_LIST})
 
