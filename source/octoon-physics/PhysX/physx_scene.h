@@ -38,6 +38,10 @@ namespace octoon
             virtual math::Vector3 getGravity() const noexcept;
 
             virtual void simulation(float delta) noexcept;
+
+            void setPhysicsScene(physx::PxScene* scene) noexcept;
+            void setAccumulator(float a) noexcept;
+            void setStepSize(float s) noexcept;
         protected:
             physx::PxScene* physicsScene;
 

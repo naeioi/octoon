@@ -39,7 +39,10 @@ namespace octoon
 
             if (!PxInitExtensions(*physics, pvd))
                 throw runtime::runtime_error::create("PxInitExtensions failed!");
-
+        }
+            
+        PhysicsScenePtr createScene() except
+        {
             physx::PxSceneDesc sceneDesc(physics->getTolerancesScale());
             Physics::setGravity(math::Vector3(0.f, -9.8f, 0.f));
             math::Vector3 g = Physics::getGravity();
@@ -48,7 +51,12 @@ namespace octoon
             sceneDesc.cpuDispatcher = dispatcher;
             sceneDesc.filterShader = physx::PxDefaultSimulationFilterShader;
             physicsScene = physics->createScene(sceneDesc);
+
+            auto retval = std::make_shared<PhysxScene>();
+            retval.setPhysicsScene(physicsScene);
+            return retval;
         }
+
         PhysxSystem::~PhysxSystem() noexcept
         {
 

@@ -32,6 +32,7 @@ namespace octoon
             OctoonDeclareSubClass(PhysxSystem, PhysicsSystem)
         public:
             PhysxSystem() except;
+            virtual PhysicsScenePtr createScene() except;
             virtual ~PhysxSystem() noexcept;
         protected:
             bool recordMemoryAllocations = true;
