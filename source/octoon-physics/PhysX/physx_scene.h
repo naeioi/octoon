@@ -39,6 +39,8 @@ namespace octoon
 
             virtual void simulation(float delta) noexcept;
 
+            virtual void addPhysicsRigidbody(PhysicsRigidbodyPtr rigidbody) noexcept;
+
             void setPhysicsScene(physx::PxScene* scene) noexcept;
             void setAccumulator(float a) noexcept;
             void setStepSize(float s) noexcept;

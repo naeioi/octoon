@@ -33,6 +33,7 @@ namespace octoon
         public:
             PhysxSystem() except;
             virtual PhysicsScenePtr createScene() except;
+            virtual PhysicsRigidbodyPtr createRigidBody() except;
             virtual ~PhysxSystem() noexcept;
         protected:
             bool recordMemoryAllocations = true;

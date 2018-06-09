@@ -33,6 +33,11 @@ namespace octoon
             
         }
 
+        void addPhysicsRigidbody(PhysicsRigidbodyPtr rigidbody) noexcept
+        {
+
+        }
+
         void setPhysicsScene(physx::PxScene* scene) noexcept
         {
             physicsScene = scene;
