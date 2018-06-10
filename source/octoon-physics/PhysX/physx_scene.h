@@ -8,6 +8,7 @@
 #include <octoon/runtime/rtti_interface.h>
 #include <octoon/math/math.h>
 
+#include <octoon/physics/physics_type.h>
 #include <octoon/physics/physics_scene.h>
 
 namespace physx
@@ -39,11 +40,12 @@ namespace octoon
 
             virtual void simulation(float delta) noexcept;
 
-            virtual void addPhysicsRigidbody(PhysicsRigidbodyPtr rigidbody) noexcept;
+            virtual void addRigidbody(PhysicsRigidbodyPtr rigidbody) noexcept;
+
+            virtual void setStepSize(float s) noexcept;
 
             void setPhysicsScene(physx::PxScene* scene) noexcept;
             void setAccumulator(float a) noexcept;
-            void setStepSize(float s) noexcept;
         protected:
             physx::PxScene* physicsScene;
 

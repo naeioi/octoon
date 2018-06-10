@@ -17,10 +17,14 @@ namespace octoon
             PhysicsScene() noexcept;
             virtual ~PhysicsScene() noexcept;
 
+            virtual void addRigidbody(PhysicsRigidbodyPtr rigidbody) noexcept = 0;
+
             virtual void setGravity(const math::Vector3& gravity) noexcept = 0;
             virtual math::Vector3 getGravity() const noexcept = 0;
 
             virtual void simulation(float delta) noexcept = 0;
+
+            virtual void setStepSize(float s) noexcept = 0;
         };
     }
 }
