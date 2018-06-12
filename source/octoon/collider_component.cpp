@@ -15,7 +15,7 @@ namespace octoon
 	Collider::~Collider()
 	{
 	}
-
+/*
 	void
 	Collider::OnCollisionEnter(Collision collision)
 	{
@@ -47,4 +47,5 @@ namespace octoon
 	{
 		return shared_material;
 	}
+	*/
 }

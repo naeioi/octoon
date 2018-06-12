@@ -118,17 +118,18 @@ int main(int argc, const char* argv[])
 		object->addComponent<octoon::GuizmoComponent>(camera);
 		object->addComponent<CubeController>(material);
 		object->addComponent<octoon::Rigidbody>(false, 1.0f);
-		object->addComponent<octoon::BoxCollider>(octoon::math::Vector3(1.0f, 1.0f, 1.0f));
+
+		/*object->addComponent<octoon::BoxCollider>(octoon::math::Vector3(1.0f, 1.0f, 1.0f));
 		{
 			auto transform_component = object->getComponent<octoon::TransformComponent>();
 			transform_component->setTranslate(octoon::math::Vector3(0.f, 5.f, 0.f));
-		}
+		}*/
 
 		auto plane = octoon::GameObject::create("actor");
 		plane->addComponent<octoon::MeshFilterComponent>(octoon::model::makeCube(10.0, 1.0, 10.0));
 		plane->addComponent<octoon::MeshRendererComponent>(material);
 		plane->addComponent<octoon::Rigidbody>(true);
-		plane->addComponent<octoon::BoxCollider>(octoon::math::Vector3(10.0f, 1.0f, 10.0f));
+		/*plane->addComponent<octoon::BoxCollider>(octoon::math::Vector3(10.0f, 1.0f, 10.0f));*/
 
 		::OctoonMainLoop();
 	}
