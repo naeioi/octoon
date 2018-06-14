@@ -43,28 +43,12 @@ namespace octoon
 		virtual void onOpenScene(const GameScenePtr& scene) except;
 		virtual void onCloseScene(const GameScenePtr& scene) noexcept;
 
-		physx::PxPhysics* getSDK() noexcept { return physics; }
-		physx::PxCooking* getCooking() noexcept { return cooking; }
-		physx::PxScene* getScene() noexcept { return physicsScene; }
-
 	private:
 		PhysicsFeature(const PhysicsFeature&) = delete;
 		PhysicsFeature& operator=(const PhysicsFeature&) = delete;
 
-	private:
-		bool recordMemoryAllocations = true;
-
-		std::unique_ptr<physx::PxDefaultErrorCallback> defaultErrorCallback;
-		std::unique_ptr<physx::PxDefaultAllocator> defaultAllocatorCallback;
-		physx::PxFoundation* foundation;
-		physx::PxPvd* pvd;
-		physx::PxPhysics* physics;
-		physx::PxCooking* cooking;
-		physx::PxDefaultCpuDispatcher* dispatcher;
-		physx::PxScene* physicsScene;
-
-		float accumulator;
-		float stepSize;
+    private:
+        
     };
 }
 
