@@ -21,8 +21,8 @@ namespace octoon
             virtual PhysicsScenePtr createScene() except;
             virtual ~PhysicsSystem() noexcept;
 
-            virtual PhysicsScene * createScene() except;
-            virtual PhysicsRigidbody * createRigidbody() except;
+            virtual PhysicsScene * createScene() except = 0;
+            virtual PhysicsRigidbody * createRigidbody() except = 0;
         };
     }
 }
