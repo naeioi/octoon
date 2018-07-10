@@ -18,11 +18,13 @@ namespace octoon
             OctoonDeclareSubInterface(PhysicsSystem, runtime::RttiInterface)
         public:
             PhysicsSystem() noexcept;
-            virtual PhysicsScenePtr createScene() except;
+            virtual PhysicsScene * createScene() except;
             virtual ~PhysicsSystem() noexcept;
 
             virtual PhysicsScene * createScene() except = 0;
+            virtual void releaseScene(PhysicsScene * scene) except = 0;
             virtual PhysicsRigidbody * createRigidbody() except = 0;
+            virtual void releaseRigidbody(PhysicsRigidbody * rigidbody) except = 0;
         };
     }
 }
